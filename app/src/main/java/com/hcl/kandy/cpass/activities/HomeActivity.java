@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
-import com.hcl.kandy.cpass.fragments.AddressbookFragment;
+import com.hcl.kandy.cpass.fragments.AddressbookListFragment;
 import com.hcl.kandy.cpass.fragments.CallFragment;
 import com.hcl.kandy.cpass.fragments.ChatFragment;
 import com.hcl.kandy.cpass.fragments.PresenceFragment;
@@ -36,7 +36,7 @@ public class HomeActivity extends BaseActivity
     Fragment smsFragment = SMSFragment.newInstance();
     Fragment callFragment = CallFragment.newInstance();
     Fragment presenceFragment = PresenceFragment.newInstance();
-    Fragment addressbookFragment = AddressbookFragment.newInstance();
+    Fragment addressbookFragment = AddressbookListFragment.newInstance();
     Toolbar toolbar;
 
     @Override

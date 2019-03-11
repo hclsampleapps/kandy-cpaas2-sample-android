@@ -1,13 +1,10 @@
-package com.hcl.kandy.cpass.fragments;
+package com.hcl.kandy.cpass.activities;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.hcl.kandy.cpass.App;
@@ -21,10 +18,8 @@ import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 
 import java.util.List;
 
-/**
- * Created by Ashish Goel on 2/4/2019.
- */
-public class AddressbookFragment extends BaseFragment implements View.OnClickListener {
+public class AddContactActivity extends BaseActivity implements View.OnClickListener {
+
     private AddressBookService mAddressBookService;
     private EditText mEtPrimaryContact;
     private EditText mEtFirstName;
@@ -34,38 +29,22 @@ public class AddressbookFragment extends BaseFragment implements View.OnClickLis
     private EditText mEtHomePhoneNo;
     private EditText mEtMobilePhoneNo;
 
-    public AddressbookFragment() {
-    }
-
-    public static AddressbookFragment newInstance() {
-        return new AddressbookFragment();
-    }
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = getContext();
-        if (context != null)
-            initAddressBookService(context);
-    }
+        setContentView(R.layout.activity_add_contact);
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View inflate = inflater.inflate(R.layout.fragment_addressbook_add, container, false);
-        View mBtnCreateContact = inflate.findViewById(R.id.button_create_contact);
-        mEtPrimaryContact = inflate.findViewById(R.id.et_primary_contact);
-        mEtFirstName = inflate.findViewById(R.id.et_first_name);
-        mEtLastName = inflate.findViewById(R.id.et_last_name);
-        mEtEmail = inflate.findViewById(R.id.et_email);
-        mEtBuisPhoneNo = inflate.findViewById(R.id.et_b_phone_no);
-        mEtHomePhoneNo = inflate.findViewById(R.id.et_h_phone_no);
-        mEtMobilePhoneNo = inflate.findViewById(R.id.et_m_phone_no);
+        View mBtnCreateContact = findViewById(R.id.button_create_contact);
+        mEtPrimaryContact = findViewById(R.id.et_primary_contact);
+        mEtFirstName = findViewById(R.id.et_first_name);
+        mEtLastName = findViewById(R.id.et_last_name);
+        mEtEmail = findViewById(R.id.et_email);
+        mEtBuisPhoneNo = findViewById(R.id.et_b_phone_no);
+        mEtHomePhoneNo = findViewById(R.id.et_h_phone_no);
+        mEtMobilePhoneNo = findViewById(R.id.et_m_phone_no);
         mBtnCreateContact.setOnClickListener(this);
 
-        getAllContact();
-        return inflate;
+        initAddressBookService(this);
     }
 
     private void initAddressBookService(Context context) {
@@ -104,24 +83,6 @@ public class AddressbookFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onFail(MobileError mobileError) {
                 Log.d("HCL", "Addressbook contact add fail");
-            }
-        });
-    }
-
-    private void getAllContact(){
-        mAddressBookService.retrieveContactList("default", new RetrieveContactsCallback() {
-            @Override
-            public void onSuccess(List<Contact> list) {
-                Log.d("HCL", "got list of conatct");
-                for (Contact item :
-                     list) {
-                   Log.d("HCL" ,item.getEmailAddress());
-                }
-            }
-
-            @Override
-            public void onFail(MobileError mobileError) {
-                Log.d("HCL", "fail list of conatct");
             }
         });
     }
