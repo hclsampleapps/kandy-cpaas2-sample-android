@@ -126,7 +126,7 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void sendMessage(String sender, String participant, String txt) {
-        SMSConversation smsConversation = (SMSConversation) smsService.createConversation(sender, participant);
+        SMSConversation smsConversation = (SMSConversation) smsService.createConversation(participant,sender);
 
         OutboundMessage message = smsService.createMessage(txt);
 
