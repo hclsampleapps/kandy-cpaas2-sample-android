@@ -11,9 +11,9 @@
         android:id="@+id/etDestainationAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter destaination address"
+        android:hint="Enter destination address"
         android:maxLines="1"
-        android:text="ashish08@hcl107.MPb0QLfe.att.com"
+        tools:text="ashish08@hcl107.MPb0QLfe.att.com"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
