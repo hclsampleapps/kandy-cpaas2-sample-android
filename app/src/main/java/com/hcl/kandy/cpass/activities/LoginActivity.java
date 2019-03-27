@@ -98,11 +98,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         finish();
                     }else{
                         hideProgressBAr();
+                        Log.d("HCL", "login failed");
                         Toast.makeText(LoginActivity.this, "Try again..", Toast.LENGTH_SHORT).show();
                     }
 
                 }else{
                     hideProgressBAr();
+                    Log.d("HCL", "login failed");
                     Toast.makeText(LoginActivity.this, "Try again..", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -112,6 +114,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 call.cancel();
                 if (!isFinishing()) {
                     hideProgressBAr();
+                    Log.d("HCL", "login failed");
                     Toast.makeText(LoginActivity.this, "Try again..", Toast.LENGTH_SHORT).show();
                 }
             }
