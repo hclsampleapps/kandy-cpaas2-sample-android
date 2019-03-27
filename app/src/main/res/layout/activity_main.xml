@@ -53,8 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="ashish07@idx4.com"
-            android:text="rajesh@proeasyweb.com"
+            android:hint="abcd@xyz.com"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
@@ -97,8 +96,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="PUB-hcl107.MPbe"
-            android:text="PUB-hcl.srnf"
+            android:hint="PUB-xyz"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_client" />
