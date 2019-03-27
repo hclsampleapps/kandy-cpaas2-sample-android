@@ -1,24 +1,20 @@
 # kandy-cpaas2-sample-android
-
-It is the sample app of cpass2 modules (Call, SMS, Chat, Presence, Address book)
+It is the sample app of CPaaS2 modules (Call, SMS, Chat, Presence, Address book)
 
 ### Install as Android App
-
-Download the .apk or developer can generate the apk
+You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-android/releases) section.
+If you are a developer, then you can generate the apk from source code.
 
 ### Run this Android App
-
 1. Open Android App
 2. Enter the credentials of a user.
 
 ### Execute commands for development
-
 1. Setup repository via `git clone https://github.com/hclsampleapps/kandy-cpaas2-sample-android`
 2. Resolve build dependency via sync gradle in android studio
 3. Generate final build by android studio
 
 ### Branching strategy
-
 We are following **GitFlow** as the branching strategy and for release management.
 
 The central repo holds two main branches with an infinite lifetime:
@@ -33,7 +29,6 @@ We consider `origin/master` to be the main branch where the source code of HEAD 
 We consider `origin/develop` to be the main branch where the source code of HEAD always reflects a state with the latest delivered development changes for the next release.
 
 #### Supporting branches
-
 Next to the main branches `master` and `develop`, our development model uses a variety of supporting branches to aid parallel development between team members.
 
 The different types of branches we may use are:
@@ -43,7 +38,6 @@ The different types of branches we may use are:
 - Hotfix branches
 
 ### Contributing
-
 Fork the repository. Then, run:
 
 ```
