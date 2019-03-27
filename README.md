@@ -5,6 +5,8 @@ It is the sample app of CPaaS2 modules (Call, SMS, Chat, Presence, Address book)
 You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-android/releases) section.
 If you are a developer, then you can generate the apk from source code.
 
+Note: Minimum version required for install apk is kitkat (4.4)
+
 ### Run this Android App
 1. Open Android App
 2. Enter the credentials of a user.
