@@ -10,8 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
@@ -41,6 +47,13 @@ public class PresenceFragment extends BaseFragment implements PresenceListener {
     private PresenceSource myPresenceSource;
     private List<PresenceList> mPresenceLists;
     private PresenceAdapter adapter;
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
 
     public PresenceFragment() {
     }
@@ -248,6 +261,88 @@ public class PresenceFragment extends BaseFragment implements PresenceListener {
 
         alert.setNegativeButton("Cancel",
                 (dialog, which) -> {
+                });
+
+        alert.show();
+    }
+
+    private void updateMyPresenceStatus() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+
+        LinearLayout layout = new LinearLayout(mContext);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.update_presence_status_dialog, null);
+        layout.addView(v);
+
+        Spinner spinner = v.findViewById(R.id.presence_status_spinner);
+        Spinner availabilitySpinner = v.findViewById(R.id.presence_availability_spinner);
+        EditText otherMessageEditText = v.findViewById(R.id.other_status_message);
+
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, PresenceEnums.values());
+        spinner.setAdapter(spinnerAdapter);
+
+        if (myPresenceSource != null) {
+            PresenceEnums presenceEnums = myPresenceSource.getPresenceActivity().getPresenceState();
+            spinner.setSelection(presenceEnums.ordinal(), false);
+            availabilitySpinner.setEnabled(presenceEnums.canOverrideWillingness());
+            otherMessageEditText.setEnabled(presenceEnums == PresenceEnums.OTHER);
+        }
+
+        spinner.setOnItemSelectedListener(new ExpandableListView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                PresenceEnums presenceEnum = (PresenceEnums) adapterView.getItemAtPosition(i);
+                availabilitySpinner.setEnabled(presenceEnum.canOverrideWillingness());
+                otherMessageEditText.setEnabled(presenceEnum == PresenceEnums.OTHER);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                mContext, R.array.presence_availability, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        availabilitySpinner.setAdapter(adapter);
+
+        alert.setTitle("Update Status");
+        alert.setView(layout);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                if (myPresenceSource == null) {
+                    createPresenceSource();
+                    return;
+                }
+
+                String sourceID = myPresenceSource.getSourceId();
+                int duration = 86400;
+                PresenceEnums activity = (PresenceEnums) spinner.getSelectedItem();
+                String status = (String) availabilitySpinner.getSelectedItem();
+                String other = otherMessageEditText.getText().toString();
+
+                mPresenceService.updatePresenceSource(sourceID, duration, activity, status, other,
+                        new FetchPresenceSourceCallback() {
+                            @Override
+                            public void onSuccess(PresenceSource presenceSource) {
+                                updateMyPresence(presenceSource);
+                            }
+
+                            @Override
+                            public void onFail(MobileError error) {
+                                Log.d(TAG, error.getErrorMessage());
+                            }
+                        }
+                );
+            }
+        });
+
+        alert.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
                 });
 
         alert.show();
