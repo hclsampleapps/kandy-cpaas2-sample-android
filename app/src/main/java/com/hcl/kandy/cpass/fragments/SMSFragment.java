@@ -119,7 +119,12 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
                         outboundMessage.getMessageId()
                 );
                 notifyList(smsModel);
-                mEtMessage.setText("");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mEtMessage.setText("");
+                    }
+                });
             }
         });
 

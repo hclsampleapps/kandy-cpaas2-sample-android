@@ -121,7 +121,12 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
                         outboundMessage.getMessageId()
                 );
                 notifyList(chatModel);
-                mEtMessage.setText("");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mEtMessage.setText("");
+                    }
+                });
             }
 
             @Override
