@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
@@ -35,6 +38,7 @@ import com.rbbn.cpaas.mobile.presence.api.PresenceSource;
 import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 import com.rbbn.cpaas.mobile.utilities.services.PresenceEnums;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.rbbn.cpaas.mobile.utilities.security.TLSSocketFactory.TAG;
@@ -42,12 +46,15 @@ import static com.rbbn.cpaas.mobile.utilities.security.TLSSocketFactory.TAG;
 /**
  * Created by Ashish Goel on 2/4/2019.
  */
-public class PresenceFragment extends BaseFragment implements PresenceListener {
+public class PresenceFragment extends BaseFragment implements PresenceListener, View.OnClickListener {
     private PresenceService mPresenceService;
     private PresenceSource myPresenceSource;
-    private List<PresenceList> mPresenceLists;
+    private List<PresenceList> mPresenceLists = new ArrayList<>();
     private PresenceAdapter adapter;
     private Context mContext;
+    private ExpandableListView presenceLists;
+    private ImageView mPresenceItemImageView;
+    private TextView mPresenceStatusTextView;
 
     @Override
     public void onAttach(Context context) {
@@ -82,9 +89,20 @@ public class PresenceFragment extends BaseFragment implements PresenceListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_presence, container, false);
+        adapter = new PresenceAdapter(mPresenceLists, getActivity());
+        presenceLists = inflate.findViewById(R.id.presenceLists);
+        presenceLists.setAdapter(adapter);
+
+        FloatingActionButton newPresenceButton = inflate.findViewById(R.id.newPresenceButton);
+        newPresenceButton.setOnClickListener(this);
+
+        mPresenceItemImageView = inflate.findViewById(R.id.presence_item_image_view);
+        mPresenceStatusTextView = inflate.findViewById(R.id.presence_status_text_view);
+
+        View updateStatusLayout = inflate.findViewById(R.id.presence_status_text_view);
+        updateStatusLayout.setOnClickListener(this);
         return inflate;
     }
-
 
     @Override
     public void onResume() {
@@ -144,8 +162,8 @@ public class PresenceFragment extends BaseFragment implements PresenceListener {
     private void updateMyPresence(PresenceSource presenceSource) {
         myPresenceSource = presenceSource;
         PresenceActivity presenceActivity = presenceSource.getPresenceActivity();
-//        presenceItemImageView.setImageResource(getImageResourceForPresence(presenceActivity));
-//        presenceStatusTextView.setText(presenceActivity.getActivity());
+        mPresenceItemImageView.setImageResource(getImageResourceForPresence(presenceActivity));
+        mPresenceStatusTextView.setText(presenceActivity.getActivity());
     }
 
     private void createPresenceSource() {
@@ -158,14 +176,14 @@ public class PresenceFragment extends BaseFragment implements PresenceListener {
             @Override
             public void onFail(MobileError error) {
                 Log.d("HCL", error.getErrorMessage());
-//                presenceItemImageView.setImageResource(android.R.drawable.presence_offline);
-//                presenceStatusTextView.setText("Offline");
+                mPresenceItemImageView.setImageResource(android.R.drawable.presence_offline);
+                mPresenceStatusTextView.setText("Offline");
 
             }
         });
     }
 
-    static protected int getImageResourceForPresence(PresenceActivity presenceActivity) {
+    public static int getImageResourceForPresence(PresenceActivity presenceActivity) {
         String status = presenceActivity.getStatus();
         PresenceEnums presenceState = presenceActivity.getPresenceState();
         int resource = android.R.drawable.presence_offline;
@@ -220,6 +238,19 @@ public class PresenceFragment extends BaseFragment implements PresenceListener {
         });
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.newPresenceButton:
+                createNewPresenceList();
+                break;
+
+            case R.id.presence_status_text_view:
+                updateMyPresenceStatus();
+                break;
+        }
+    }
+
     private void createNewPresenceList() {
         Context _context = getContext();
         AlertDialog.Builder alert = new AlertDialog.Builder(_context);
@@ -246,7 +277,7 @@ public class PresenceFragment extends BaseFragment implements PresenceListener {
                     @Override
                     public void onSuccess(PresenceList presenceList) {
                         mPresenceLists.add(presenceList);
-//                        adapter.setPresenceLists(presenceLists);
+                        adapter.setPresenceLists(mPresenceLists);
                         subscribeForPresenceUpdates(presenceList);
                     }
 
@@ -357,4 +388,5 @@ public class PresenceFragment extends BaseFragment implements PresenceListener {
     public void presenceListNotification(String s, PresenceList presenceList) {
 
     }
+
 }
