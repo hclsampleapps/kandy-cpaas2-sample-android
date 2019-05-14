@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/etDestainationAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter destaination address"
+            android:maxLines="1"
+            android:text="userdemo@mohitjain.md3g.att.com"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/startcall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startcall" />
+
+    <com.rbbn.cpaas.mobile.core.WebRTC.view.VideoView
+        android:id="@+id/remoteVideoView"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
+        android:layout_margin="5dip" />
+
+    <com.rbbn.cpaas.mobile.core.WebRTC.view.VideoView
+        android:id="@+id/localVideoView"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
+        android:layout_margin="5dip" />
+</LinearLayout>
