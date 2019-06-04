@@ -1,31 +1,25 @@
 package com.hcl.kandy.cpass.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
 import com.rbbn.cpaas.mobile.CPaaS;
-import com.rbbn.cpaas.mobile.call.IncomingCall;
 import com.rbbn.cpaas.mobile.call.api.CallApplicationListener;
 import com.rbbn.cpaas.mobile.call.api.CallInterface;
 import com.rbbn.cpaas.mobile.call.api.CallService;
 import com.rbbn.cpaas.mobile.call.api.CallState;
 import com.rbbn.cpaas.mobile.call.api.IncomingCallInterface;
 import com.rbbn.cpaas.mobile.call.api.MediaAttributes;
-import com.rbbn.cpaas.mobile.call.api.OutgoingCallCreationCallback;
 import com.rbbn.cpaas.mobile.call.api.OutgoingCallInterface;
-import com.rbbn.cpaas.mobile.call.model.WrtcsSession;
-import com.rbbn.cpaas.mobile.core.WebRTC.view.VideoView;
+import com.rbbn.cpaas.mobile.core.webrtc.view.VideoView;
 import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 import com.rbbn.cpaas.mobile.utilities.services.ServiceInfo;
 import com.rbbn.cpaas.mobile.utilities.services.ServiceType;
@@ -37,16 +31,16 @@ import java.util.Map;
 /**
  * Created by Aman on 2/4/2019.
  */
-public class CallFragment extends BaseFragment implements View.OnClickListener {
+public class CallFragment1 extends BaseFragment implements View.OnClickListener {
     String TAG = "Call Functionality";
     VideoView remoteVideoView, localVideoView;
     private EditText mEtDestination;
 
-    public CallFragment() {
+    public CallFragment1() {
     }
 
-    public static CallFragment newInstance() {
-        return new CallFragment();
+    public static CallFragment1 newInstance() {
+        return new CallFragment1();
     }
 
     @Override
@@ -66,7 +60,7 @@ public class CallFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View inflate = inflater.inflate(R.layout.fragment_call, container, false);
+        View inflate = inflater.inflate(R.layout.fragment_call1, container, false);
         View startcall = inflate.findViewById(R.id.startcall);
         mEtDestination = inflate.findViewById(R.id.etDestainationAddress);
         startcall.setOnClickListener(this);

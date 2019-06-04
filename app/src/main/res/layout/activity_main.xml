@@ -31,7 +31,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:hint="nvs-cpaas-oauth.kandy.io"
-            android:text="nvs-cpaas-oauth.kandy.io"
+            android:text="oauth-cpaas.att.com"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_url" />
@@ -54,6 +54,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:hint="abcd@xyz.com"
+            android:text="nagpalk@smart-mail.info"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
@@ -96,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="PUB-xyz"
+            android:text="PUB-hcl999715.av10"
 
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

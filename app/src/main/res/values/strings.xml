@@ -20,6 +20,7 @@
     <string name="status">Status</string>
     <string name="enter_message">Enter message</string>
     <string name="availability">Availability</string>
+    <string name="foreground_call_service_content_text">Call</string>
 
     <string-array name="presence_availability">
         <item>Open</item>
