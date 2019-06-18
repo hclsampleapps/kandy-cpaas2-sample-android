@@ -5,5 +5,20 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="dialog_margin">32dp</dimen>
+    <dimen name="dialog_margin">20dp</dimen>
+
+
+    <dimen name="menu_button_margin">1dp</dimen>
+    <dimen name="menu_button_w">75dp</dimen>
+    <dimen name="local_video_width">90dp</dimen>
+    <dimen name="local_video_height">120dp</dimen>
+    <dimen name="dialpad_number_text_size">10sp</dimen>
+    <dimen name="dialpad_button_margin">4dp</dimen>
+    <dimen name="active_call_action_label_text_size">12sp</dimen>
+    <dimen name="active_call_label_text_margin_top">4dp</dimen>
+    <dimen name="active_call_item_layout_margin">4dp</dimen>
+
+    <dimen name="textinputlayout_margin">4dp</dimen>
+    <dimen name="text_drawable_padding">8dp</dimen>
+    <dimen name="contact_view_margin">8dp</dimen>
 </resources>

@@ -18,8 +18,9 @@ import android.widget.Toast;
 
 import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
+import com.hcl.kandy.cpass.call.CallFragment;
 import com.hcl.kandy.cpass.fragments.AddressbookListFragment;
-import com.hcl.kandy.cpass.fragments.CallFragment;
+import com.hcl.kandy.cpass.fragments.CallFragment1;
 import com.hcl.kandy.cpass.fragments.ChatFragment;
 import com.hcl.kandy.cpass.fragments.PresenceFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
@@ -72,6 +73,7 @@ public class HomeActivity extends BaseActivity
             @Override
             public void onCpassSuccess() {
                 hideProgressBAr();
+
             }
 
             @Override
