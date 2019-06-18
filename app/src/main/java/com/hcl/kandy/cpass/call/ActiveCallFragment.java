@@ -223,7 +223,7 @@ public class ActiveCallFragment extends Fragment implements CPaaSCallFragment {
         callProgressDialog = new ProgressDialog(getContext());
         topLevelLayout = getActivity().findViewById(R.id.active_call_layout);
         hangupButton = getActivity().findViewById(R.id.activeCallHangupButton);
-//        hangupButton.setImageDrawable(new IconicsDrawable(getContext()).icon(GoogleMaterial.Icon.gmd_call_end).color(Color.RED).sizeDp(48));
+        hangupButton.setImageDrawable(new IconicsDrawable(getContext()).icon(GoogleMaterial.Icon.gmd_call_end).color(Color.RED).sizeDp(48));
         activeCallerName = getActivity().findViewById(R.id.activeCallCallerName);
         callDurationTextView = getActivity().findViewById(R.id.callDurationText);
         View secondButtonGroupLayout = getActivity().findViewById(R.id.second_event_group);
@@ -571,25 +571,25 @@ public class ActiveCallFragment extends Fragment implements CPaaSCallFragment {
     }
 
     private void toggleDTMFView() {
-        if (keyPadView.getVisibility() == View.INVISIBLE) {
+       /* if (keyPadView.getVisibility() == View.INVISIBLE) {
             activeButtonGroup.setVisibility(View.INVISIBLE);
             keyPadView.setVisibility(View.VISIBLE);
         } else {
             keyPadView.setVisibility(View.INVISIBLE);
             hideShowControls();
-        }
+        }*/
     }
 
     public void hideShowControls() {
         Log.d(TAG, "hideShowControls: ");
-        if (keyPadView.getVisibility() != View.VISIBLE) {
+      /*  if (keyPadView.getVisibility() != View.VISIBLE) {
             if (callControlButtonGroup.getVisibility() != View.VISIBLE) {
                 callControlButtonGroup.setVisibility(View.VISIBLE);
                 activeButtonGroup.setVisibility(View.VISIBLE);
             } else {
                 callControlButtonGroup.setVisibility(View.INVISIBLE);
             }
-        }
+        }*/
     }
 
     public void setVideoViews() {
