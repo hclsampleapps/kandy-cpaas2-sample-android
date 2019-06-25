@@ -1,20 +1,16 @@
 package com.hcl.kandy.cpass.activities;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.PeriodicSync;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.hcl.kandy.cpass.R;
 import com.hcl.kandy.cpass.remote.RestApiClient;
@@ -153,7 +149,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
         }
     }
- 
+
     String[] PERMISSIONS = {
             android.Manifest.permission.MODIFY_AUDIO_SETTINGS,
             android.Manifest.permission.RECORD_AUDIO,
