@@ -19,6 +19,7 @@ import com.hcl.kandy.cpass.remote.models.LoginResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by Ashish Goel on 2/1/2019.
@@ -70,8 +71,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (!validate()) {
             Toast.makeText(LoginActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
             return;
+
         }
-        mRestApiInterface = RestApiClient.getClient("https://" + mBaseUrl.getText().toString()).create(RestApiInterface.class);
+
+        Retrofit client = RestApiClient.getClient("https://" + mBaseUrl.getText().toString());
+        if(client == null)
+        {
+            Toast.makeText(LoginActivity.this, "Please enter correct Fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mRestApiInterface = client.create(RestApiInterface.class);
+        if(mRestApiInterface == null)
+        {
+            Toast.makeText(LoginActivity.this, "Please enter correct Fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
         showProgressBar("Login..");
         Call<LoginResponse> responseCall = mRestApiInterface.loginAPI(
                 mEtUserName.getEditableText().toString(),
