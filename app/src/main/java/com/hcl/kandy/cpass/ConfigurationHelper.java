@@ -20,10 +20,10 @@ public class ConfigurationHelper {
     private static void setPreferedCodecs(String baseUrl) {
 
         Configuration configuration = Configuration.getInstance();
-        ICEServers iceServers = new ICEServers();
-        iceServers.addICEServer("turns:turn-"+baseUrl+":443?transport=tcp");
-        iceServers.addICEServer("turn:turn-"+baseUrl+":3535?transport=udp");
-        configuration.setICEServers(iceServers);
+//        ICEServers iceServers = new ICEServers();
+//        iceServers.addICEServer("turns:turn-"+baseUrl+":443?transport=tcp");
+//        iceServers.addICEServer("turn:turn-"+baseUrl+":3535?transport=udp");
+//        configuration.setICEServers(iceServers);
 
         CodecSet codecSet = new CodecSet();
         codecSet.audioCodecs = new CodecSet.AudioCodecType[]{CodecSet.AudioCodecType.AC_G722, CodecSet.AudioCodecType.AC_OPUS};
