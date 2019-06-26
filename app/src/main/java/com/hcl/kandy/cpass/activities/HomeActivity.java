@@ -24,6 +24,7 @@ import com.hcl.kandy.cpass.fragments.CallFragment1;
 import com.hcl.kandy.cpass.fragments.ChatFragment;
 import com.hcl.kandy.cpass.fragments.PresenceFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
+import com.hcl.kandy.cpass.groupChat.GroupChatFragment;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
 
 
@@ -38,6 +39,7 @@ public class HomeActivity extends BaseActivity
     Fragment callFragment = CallFragment.newInstance();
     Fragment presenceFragment = PresenceFragment.newInstance();
     Fragment addressbookFragment = AddressbookListFragment.newInstance();
+    Fragment groupChatFragment = new GroupChatFragment();
     Toolbar toolbar;
 
     @Override
@@ -73,7 +75,6 @@ public class HomeActivity extends BaseActivity
             @Override
             public void onCpassSuccess() {
                 hideProgressBAr();
-
             }
 
             @Override
@@ -155,7 +156,19 @@ public class HomeActivity extends BaseActivity
 
             item.setChecked(true);
             invalidateOptionsMenu();
-        } else if (id == R.id.nav_logout) {
+        }
+        else if (id == R.id.nav_group_chat) {
+            fragmentTransaction
+                    .replace(R.id.container, groupChatFragment).commit();
+
+            ActionBar supportActionBar = getSupportActionBar();
+            if (supportActionBar != null)
+                supportActionBar.setTitle("Group Chat");
+
+            item.setChecked(true);
+            invalidateOptionsMenu();
+        }
+        else if (id == R.id.nav_logout) {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
             finish();
@@ -164,7 +177,7 @@ public class HomeActivity extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    //nav_group_chat
     private void setUserInfo(String idToken) {
         JWT jwt = new JWT(idToken);
         String email = jwt.getClaim("email").asString();
