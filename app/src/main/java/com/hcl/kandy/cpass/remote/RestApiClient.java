@@ -20,11 +20,16 @@ public class RestApiClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)
-                    .build();
+            try {
+                retrofit = new Retrofit.Builder()
+                        .baseUrl(baseUrl)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .client(client)
+                        .build();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
         return retrofit;
     }
