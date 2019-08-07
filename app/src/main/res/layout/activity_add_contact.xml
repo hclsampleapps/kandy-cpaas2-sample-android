@@ -2,9 +2,9 @@
 
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
     android:fillViewport="true">
 
@@ -29,11 +29,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            tools:text="test@test.com"
             android:hint="Enter primary contact"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_primary_contact" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_primary_contact"
+            tools:text="test@test.com" />
 
         <TextView
             android:id="@+id/tv_first_name"
@@ -52,11 +52,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            tools:text="Ashish"
             android:hint="Enter first name"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_first_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_first_name"
+            tools:text="Ashish" />
 
         <TextView
             android:id="@+id/tv_last_name"
@@ -74,11 +74,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            tools:text="Goel"
             android:hint="Enter Last name"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_last_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_last_name"
+            tools:text="Goel" />
 
         <TextView
             android:id="@+id/tv_email"
@@ -96,11 +96,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            tools:text="test@test.com"
             android:hint="Enter email address"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_email"
+            tools:text="test@test.com" />
 
         <TextView
             android:id="@+id/tv_b_phone_no"
@@ -118,11 +118,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            tools:text="455533394"
             android:hint="Add Buisness phone number"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_b_phone_no" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_b_phone_no"
+            tools:text="455533394" />
 
         <TextView
             android:id="@+id/tv_h_phone_no"
@@ -140,11 +140,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            tools:text="455533394"
             android:hint="Add Buisness home number"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_h_phone_no" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_h_phone_no"
+            tools:text="455533394" />
 
         <TextView
             android:id="@+id/tv_m_phone_no"
@@ -162,11 +162,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            tools:text="455533394"
             android:hint="Add mobile phone number"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_m_phone_no" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_m_phone_no"
+            tools:text="455533394" />
 
         <Button
             android:id="@+id/button_create_contact"

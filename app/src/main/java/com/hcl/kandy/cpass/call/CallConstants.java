@@ -20,11 +20,11 @@ public final class CallConstants {
     public final static String EVENT_KEY = "event";
     public final static String EVENT_CALL_STATUS_CHANGED = "CALL_STATE_CHANGED";
     public final static String EVENT_MEDIA_ATTRIBUTES_CHANGED = "MEDIA_STATE_CHANGED";
-    public final static String EVENT_AUDIO_ROUTE_CHANGED= "AUDIO_ROUTE_CHANGED";
-    public final static String EVENT_CALL_OPERATION_PERFORMED= "CALL_OPERATION_PERFORMED";
+    public final static String EVENT_AUDIO_ROUTE_CHANGED = "AUDIO_ROUTE_CHANGED";
+    public final static String EVENT_CALL_OPERATION_PERFORMED = "CALL_OPERATION_PERFORMED";
 
     // Call events
-    public final static String CALL_OPERATION_HOLD_SUCCESS= "CALL_OPERATION_HOLD_SUCCESS";
+    public final static String CALL_OPERATION_HOLD_SUCCESS = "CALL_OPERATION_HOLD_SUCCESS";
     public final static String CALL_OPERATION_UNHOLD_SUCCESS = "CALL_OPERATION_UNHOLD_SUCCESS";
     public static final String CALL_OPERATION_UNHOLD_FAIL = "CALL_OPERATION_UNHOLD_FAIL";
     public static final String CALL_OPERATION_HOLD_FAIL = "CALL_OPERATION_HOLD_FAIL";

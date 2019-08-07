@@ -34,19 +34,18 @@ import java.util.List;
  * Created by Aman on 2/5/2019.
  */
 public class SMSFragment extends BaseFragment implements View.OnClickListener {
+    private SMSService smsService;
+    private EditText mEtDestination, mEtSender;
+    private EditText mEtMessage;
+    private RecyclerView mRecyclerView;
+    private SMSAdapter mSMSAdapter;
+    private ArrayList<SMSModel> mSMSModels;
     public SMSFragment() {
     }
 
     public static SMSFragment newInstance() {
         return new SMSFragment();
     }
-
-    private SMSService smsService;
-    private EditText mEtDestination,mEtSender;
-    private EditText mEtMessage;
-    private RecyclerView mRecyclerView;
-    private SMSAdapter mSMSAdapter;
-    private ArrayList<SMSModel> mSMSModels;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,8 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mSMSAdapter);
         mBtnSendMessage.setOnClickListener(this);
-        Context context = getContext(); if (context != null)
+        Context context = getContext();
+        if (context != null)
             initSMSService(context);
         return inflate;
     }
@@ -131,7 +131,7 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void sendMessage(String sender, String participant, String txt) {
-        SMSConversation smsConversation = (SMSConversation) smsService.createConversation(participant,sender);
+        SMSConversation smsConversation = (SMSConversation) smsService.createConversation(participant, sender);
 
         OutboundMessage message = smsService.createMessage(txt);
 
@@ -139,13 +139,13 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess() {
                 Log.d("CPaaS.SMSService", "Message is sent");
-                showMessage(mEtMessage,"Message is sent");
+                showMessage(mEtMessage, "Message is sent");
             }
 
             @Override
             public void onFail(MobileError error) {
                 Log.d("CPaaS.SMSService", "Message is failed");
-                showMessage(mEtMessage,"Try again later");
+                showMessage(mEtMessage, "Try again later");
             }
         });
     }
