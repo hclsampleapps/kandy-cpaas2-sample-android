@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import com.hcl.kandy.cpass.R;
 import com.hcl.kandy.cpass.models.ChatModel;
 

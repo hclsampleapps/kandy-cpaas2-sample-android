@@ -1,11 +1,8 @@
 package com.hcl.kandy.cpass;
 
-import android.content.Context;
-
 import com.rbbn.cpaas.mobile.utilities.Configuration;
 import com.rbbn.cpaas.mobile.utilities.webrtc.CodecSet;
 import com.rbbn.cpaas.mobile.utilities.webrtc.ICEOptions;
-import com.rbbn.cpaas.mobile.utilities.webrtc.ICEServers;
 
 public class ConfigurationHelper {
 

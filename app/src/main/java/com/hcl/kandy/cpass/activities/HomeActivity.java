@@ -20,8 +20,8 @@ import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
 import com.hcl.kandy.cpass.call.CallFragment;
 import com.hcl.kandy.cpass.fragments.AddressbookListFragment;
-import com.hcl.kandy.cpass.fragments.CallFragment1;
 import com.hcl.kandy.cpass.fragments.ChatFragment;
+import com.hcl.kandy.cpass.fragments.MultiMediaChatFragment;
 import com.hcl.kandy.cpass.fragments.PresenceFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
@@ -39,6 +39,8 @@ public class HomeActivity extends BaseActivity
     Fragment presenceFragment = PresenceFragment.newInstance();
     Fragment addressbookFragment = AddressbookListFragment.newInstance();
     Toolbar toolbar;
+    Fragment multiMediaChatFragment = MultiMediaChatFragment.newInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +107,17 @@ public class HomeActivity extends BaseActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_chat) {
+        if (id == R.id.nav_multimedia_chat) {
+            fragmentTransaction
+                    .replace(R.id.container, multiMediaChatFragment).commit();
+
+            ActionBar supportActionBar = getSupportActionBar();
+            if (supportActionBar != null)
+                supportActionBar.setTitle("Multimedia App");
+
+            item.setChecked(true);
+            invalidateOptionsMenu();
+        } else if (id == R.id.nav_chat) {
             fragmentTransaction
                     .replace(R.id.container, chatFragment).commit();
 

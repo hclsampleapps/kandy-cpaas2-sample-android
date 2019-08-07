@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_multimedia_chat"
+            android:icon="@drawable/ic_chat"
+            android:title="Multimedia Chat" />
+        <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_chat"
             android:title="Chat" />
