@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_chat"
             android:title="Chat" />
         <item
+            android:id="@+id/nav_multimedia"
+            android:icon="@drawable/ic_chat"
+            android:title="Multimedia Chat" />
+        <item
             android:id="@+id/nav_sms"
             android:icon="@drawable/ic_sms"
             android:title="SMS" />

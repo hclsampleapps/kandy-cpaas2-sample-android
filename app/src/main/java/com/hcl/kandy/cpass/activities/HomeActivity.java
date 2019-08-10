@@ -22,8 +22,10 @@ import com.hcl.kandy.cpass.call.CallFragment;
 import com.hcl.kandy.cpass.fragments.AddressbookListFragment;
 import com.hcl.kandy.cpass.fragments.CallFragment1;
 import com.hcl.kandy.cpass.fragments.ChatFragment;
+import com.hcl.kandy.cpass.fragments.MultiMediaChatFragment;
 import com.hcl.kandy.cpass.fragments.PresenceFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
+import com.hcl.kandy.cpass.models.MultimediaChatModelChatModel;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
 
 
@@ -38,6 +40,7 @@ public class HomeActivity extends BaseActivity
     Fragment callFragment = CallFragment.newInstance();
     Fragment presenceFragment = PresenceFragment.newInstance();
     Fragment addressbookFragment = AddressbookListFragment.newInstance();
+    Fragment multimediaChatFragment = MultiMediaChatFragment.newInstance();
     Toolbar toolbar;
 
     @Override
@@ -105,7 +108,17 @@ public class HomeActivity extends BaseActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_chat) {
+        if (id == R.id.nav_multimedia) {
+            fragmentTransaction
+                    .replace(R.id.container, multimediaChatFragment).commit();
+
+            ActionBar supportActionBar = getSupportActionBar();
+            if (supportActionBar != null)
+                supportActionBar.setTitle("Multimedia App");
+
+            item.setChecked(true);
+            invalidateOptionsMenu();
+        }  if (id == R.id.nav_chat) {
             fragmentTransaction
                     .replace(R.id.container, chatFragment).commit();
 
