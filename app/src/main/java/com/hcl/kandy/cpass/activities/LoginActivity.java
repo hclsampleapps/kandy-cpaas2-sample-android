@@ -27,14 +27,23 @@ import retrofit2.Retrofit;
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
+    public static String access_token = "access_token";
+    public static String id_token = "id_token";
+    public static String base_url = "base_url";
+    String[] PERMISSIONS = {
+            android.Manifest.permission.MODIFY_AUDIO_SETTINGS,
+            android.Manifest.permission.RECORD_AUDIO,
+            android.Manifest.permission.CAMERA
+            ,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+    int PERMISSION_ALL = 1;
     private RestApiInterface mRestApiInterface;
     private TextView mEtUserName;
     private TextView mEtUserPassword;
     private TextView mEtClient;
     private EditText mBaseUrl;
-    public static String access_token = "access_token";
-    public static String id_token = "id_token";
-    public static String base_url = "base_url";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,22 +159,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    String[] PERMISSIONS = {
-            android.Manifest.permission.MODIFY_AUDIO_SETTINGS,
-            android.Manifest.permission.RECORD_AUDIO,
-            android.Manifest.permission.CAMERA
-    };
-
     private boolean checkPermission() {
         for (String permission : PERMISSIONS) {
-            if (ActivityCompat.checkSelfPermission(LoginActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(LoginActivity.this, permission)
+                    != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }
         return true;
     }
-
-    int PERMISSION_ALL = 1;
 
     private void getPerMission() {
 
