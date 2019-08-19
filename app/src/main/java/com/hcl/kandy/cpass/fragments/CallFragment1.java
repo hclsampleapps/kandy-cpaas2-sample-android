@@ -48,6 +48,7 @@ public class CallFragment1 extends BaseFragment implements View.OnClickListener 
         super.onCreate(savedInstanceState);
 
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -56,6 +57,7 @@ public class CallFragment1 extends BaseFragment implements View.OnClickListener 
                 break;
         }
     }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,182 +87,193 @@ public class CallFragment1 extends BaseFragment implements View.OnClickListener 
         List<ServiceInfo> services = new ArrayList<>();
         services.add(new ServiceInfo(ServiceType.CALL, true));
         CPaaS cpass = applicationContext.getCpass();
-        CallService  callService = cpass.getCallService();
+        CallService callService = cpass.getCallService();
 
         for (CallInterface call : callService.getActiveCalls()) {
 //            if (call.getId().equals(callId))
 //                return call;
         }
-       try{
-           CallApplicationListener listnerCall=new CallApplicationListener() {
-               @Override
-               public void incomingCall(IncomingCallInterface call) {
-                   Log.i(TAG, "incomingCall: id is " + call.getId());
-                   call.setRemoteVideoView(remoteVideoView);
-                   call.setLocalVideoView(localVideoView);
-                   call.acceptCall(true);
+        try {
+            CallApplicationListener listnerCall = new CallApplicationListener() {
+                @Override
+                public void incomingCall(IncomingCallInterface call) {
+                    Log.i(TAG, "incomingCall: id is " + call.getId());
+                    call.setRemoteVideoView(remoteVideoView);
+                    call.setLocalVideoView(localVideoView);
+                    call.acceptCall(true);
 
-                   // For audio call
+                    // For audio call
 //                   call.acceptCall(false);
-               }
+                }
 
-               @Override
-               public void callStatusChanged(CallInterface callInterface, CallState callState) {
+                @Override
+                public void callStatusChanged(CallInterface callInterface, CallState callState) {
 
-               }
+                }
 
-               @Override
-               public void mediaAttributesChanged(CallInterface callInterface, MediaAttributes mediaAttributes) {
+                @Override
+                public void mediaAttributesChanged(CallInterface callInterface, MediaAttributes mediaAttributes) {
 
-               }
+                }
 
-               @Override
-               public void callAdditionalInfoChanged(CallInterface callInterface, Map<String, String> map) {
+                @Override
+                public void callAdditionalInfoChanged(CallInterface callInterface, Map<String, String> map) {
 
-               }
+                }
 
-               @Override
-               public void errorReceived(CallInterface callInterface, MobileError mobileError) {
+                @Override
+                public void errorReceived(CallInterface callInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void errorReceived(MobileError mobileError) {
+                @Override
+                public void errorReceived(MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void establishCallSucceeded(OutgoingCallInterface outgoingCallInterface) {
+                @Override
+                public void establishCallSucceeded(OutgoingCallInterface outgoingCallInterface) {
 
-               }
+                }
 
-               @Override
-               public void establishCallFailed(OutgoingCallInterface outgoingCallInterface, MobileError mobileError) {
+                @Override
+                public void establishCallFailed(OutgoingCallInterface outgoingCallInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void acceptCallSucceed(IncomingCallInterface incomingCallInterface) {
+                @Override
+                public void acceptCallSucceed(IncomingCallInterface incomingCallInterface) {
 
-               }
+                }
 
-               @Override
-               public void acceptCallFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
+                @Override
+                public void acceptCallFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void rejectCallSucceeded(IncomingCallInterface incomingCallInterface) {
+                @Override
+                public void rejectCallSucceeded(IncomingCallInterface incomingCallInterface) {
 
-               }
+                }
 
-               @Override
-               public void rejectCallFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
+                @Override
+                public void rejectCallFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void ignoreSucceed(IncomingCallInterface incomingCallInterface) {
+                @Override
+                public void ignoreSucceed(IncomingCallInterface incomingCallInterface) {
 
-               }
+                }
 
-               @Override
-               public void ignoreFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
+                @Override
+                public void ignoreFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void videoStopSucceed(CallInterface callInterface) {
+                @Override
+                public void videoStopSucceed(CallInterface callInterface) {
 
-               }
+                }
 
-               @Override
-               public void videoStopFailed(CallInterface callInterface, MobileError mobileError) {
+                @Override
+                public void videoStopFailed(CallInterface callInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void videoStartSucceed(CallInterface callInterface) {
+                @Override
+                public void videoStartSucceed(CallInterface callInterface) {
 
-               }
+                }
 
-               @Override
-               public void videoStartFailed(CallInterface callInterface, MobileError mobileError) {
+                @Override
+                public void videoStartFailed(CallInterface callInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void muteCallSucceed(CallInterface callInterface) {
+                @Override
+                public void muteCallSucceed(CallInterface callInterface) {
 
-               }
+                }
 
-               @Override
-               public void muteCallFailed(CallInterface callInterface, MobileError mobileError) {
+                @Override
+                public void muteCallFailed(CallInterface callInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void unMuteCallSucceed(CallInterface callInterface) {
+                @Override
+                public void unMuteCallSucceed(CallInterface callInterface) {
 
-               }
+                }
 
-               @Override
-               public void unMuteCallFailed(CallInterface callInterface, MobileError mobileError) {
+                @Override
+                public void unMuteCallFailed(CallInterface callInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void holdCallSucceed(CallInterface callInterface) {
+                @Override
+                public void holdCallSucceed(CallInterface callInterface) {
 
-               }
+                }
 
-               @Override
-               public void holdCallFailed(CallInterface callInterface, MobileError mobileError) {
+                @Override
+                public void holdCallFailed(CallInterface callInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void unHoldCallSucceed(CallInterface callInterface) {
+                @Override
+                public void unHoldCallSucceed(CallInterface callInterface) {
 
-               }
+                }
 
-               @Override
-               public void unHoldCallFailed(CallInterface callInterface, MobileError mobileError) {
+                @Override
+                public void unHoldCallFailed(CallInterface callInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void endCallSucceeded(CallInterface callInterface) {
+                @Override
+                public void endCallSucceeded(CallInterface callInterface) {
 
-               }
+                }
 
-               @Override
-               public void endCallFailed(CallInterface callInterface, MobileError mobileError) {
+                @Override
+                public void endCallFailed(CallInterface callInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void ringingFeedbackSucceeded(IncomingCallInterface incomingCallInterface) {
+                @Override
+                public void ringingFeedbackSucceeded(IncomingCallInterface incomingCallInterface) {
 
-               }
+                }
 
-               @Override
-               public void ringingFeedbackFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
+                @Override
+                public void ringingFeedbackFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
 
-               }
+                }
 
-               @Override
-               public void notifyCallProgressChange(CallInterface callInterface) {
+                @Override
+                public void transferCallSucceed(CallInterface callInterface) {
 
-               }
-           };
+                }
 
-           callService.setCallApplicationListener(listnerCall);
-       }catch (Exception e){
-           e.printStackTrace();
-       }
+                @Override
+                public void transferCallFailed(CallInterface callInterface, MobileError mobileError) {
+
+                }
+
+                @Override
+                public void notifyCallProgressChange(CallInterface callInterface) {
+
+                }
+            };
+
+            callService.setCallApplicationListener(listnerCall);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+
     private String parseCalleeAddress(String callee) {
         if (callee.contains("@")) {
             return callee;

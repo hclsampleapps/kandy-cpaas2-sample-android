@@ -108,14 +108,14 @@ public class AddressbookFragment extends BaseFragment implements View.OnClickLis
         });
     }
 
-    private void getAllContact(){
+    private void getAllContact() {
         mAddressBookService.retrieveContactList("default", new RetrieveContactsCallback() {
             @Override
             public void onSuccess(List<Contact> list) {
                 Log.d("HCL", "got list of conatct");
                 for (Contact item :
-                     list) {
-                   Log.d("HCL" ,item.getEmailAddress());
+                        list) {
+                    Log.d("HCL", item.getEmailAddress());
                 }
             }
 

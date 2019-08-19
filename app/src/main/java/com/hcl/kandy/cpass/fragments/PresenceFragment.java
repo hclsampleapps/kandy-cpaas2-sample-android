@@ -56,17 +56,55 @@ public class PresenceFragment extends BaseFragment implements PresenceListener, 
     private ImageView mPresenceItemImageView;
     private TextView mPresenceStatusTextView;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
-    }
-
     public PresenceFragment() {
     }
 
     public static PresenceFragment newInstance() {
         return new PresenceFragment();
+    }
+
+    public static int getImageResourceForPresence(PresenceActivity presenceActivity) {
+        String status = presenceActivity.getStatus();
+        PresenceEnums presenceState = presenceActivity.getPresenceState();
+        int resource = android.R.drawable.presence_offline;
+
+        switch (status) {
+            case "Open":
+                switch (presenceState) {
+                    case AVAILABLE:
+                    case LUNCH:
+                    case OTHER:
+                        resource = android.R.drawable.presence_online;
+                        break;
+
+                    case UNKNOWN:
+                        resource = android.R.drawable.presence_invisible;
+                        break;
+                }
+                break;
+
+            case "Closed":
+                switch (presenceState) {
+                    case BUSY:
+                    case ON_THE_PHONE:
+                    case UNKNOWN:
+                    case OTHER:
+                        resource = android.R.drawable.presence_busy;
+                        break;
+
+                    case ON_VACATION:
+                        resource = android.R.drawable.presence_away;
+                        break;
+                }
+                break;
+        }
+        return resource;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
 
     @Override
@@ -158,7 +196,6 @@ public class PresenceFragment extends BaseFragment implements PresenceListener, 
         });
     }
 
-
     private void updateMyPresence(PresenceSource presenceSource) {
         myPresenceSource = presenceSource;
         PresenceActivity presenceActivity = presenceSource.getPresenceActivity();
@@ -181,44 +218,6 @@ public class PresenceFragment extends BaseFragment implements PresenceListener, 
 
             }
         });
-    }
-
-    public static int getImageResourceForPresence(PresenceActivity presenceActivity) {
-        String status = presenceActivity.getStatus();
-        PresenceEnums presenceState = presenceActivity.getPresenceState();
-        int resource = android.R.drawable.presence_offline;
-
-        switch (status) {
-            case "Open":
-                switch (presenceState) {
-                    case AVAILABLE:
-                    case LUNCH:
-                    case OTHER:
-                        resource = android.R.drawable.presence_online;
-                        break;
-
-                    case UNKNOWN:
-                        resource = android.R.drawable.presence_invisible;
-                        break;
-                }
-                break;
-
-            case "Closed":
-                switch (presenceState) {
-                    case BUSY:
-                    case ON_THE_PHONE:
-                    case UNKNOWN:
-                    case OTHER:
-                        resource = android.R.drawable.presence_busy;
-                        break;
-
-                    case ON_VACATION:
-                        resource = android.R.drawable.presence_away;
-                        break;
-                }
-                break;
-        }
-        return resource;
     }
 
     private void subscribeForPresenceUpdates(PresenceList presenceList) {

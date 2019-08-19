@@ -250,6 +250,16 @@ public class CPaaSCallManager implements CallApplicationListener {
     }
 
     @Override
+    public void transferCallSucceed(CallInterface callInterface) {
+
+    }
+
+    @Override
+    public void transferCallFailed(CallInterface callInterface, MobileError mobileError) {
+
+    }
+
+    @Override
     public void notifyCallProgressChange(CallInterface call) {
 
     }
