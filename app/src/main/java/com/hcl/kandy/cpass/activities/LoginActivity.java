@@ -1,15 +1,16 @@
 package com.hcl.kandy.cpass.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.hcl.kandy.cpass.R;
 import com.hcl.kandy.cpass.remote.RestApiClient;
@@ -19,6 +20,7 @@ import com.hcl.kandy.cpass.remote.models.LoginResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by Ashish Goel on 2/1/2019.
@@ -67,11 +69,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void OnLoginClick() {
 
+        if (!checkPermission()) {
+            getPerMission();
+            return;
+        }
+
+
         if (!validate()) {
             Toast.makeText(LoginActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
             return;
+
         }
-        mRestApiInterface = RestApiClient.getClient("https://" + mBaseUrl.getText().toString()).create(RestApiInterface.class);
+
+        Retrofit client = RestApiClient.getClient("https://" + mBaseUrl.getText().toString());
+        if (client == null) {
+            Toast.makeText(LoginActivity.this, "Please enter correct Fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mRestApiInterface = client.create(RestApiInterface.class);
+        if (mRestApiInterface == null) {
+            Toast.makeText(LoginActivity.this, "Please enter correct Fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
         showProgressBar("Login..");
         Call<LoginResponse> responseCall = mRestApiInterface.loginAPI(
                 mEtUserName.getEditableText().toString(),
@@ -96,13 +115,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         hideProgressBAr();
                         startActivity(intent);
                         finish();
-                    }else{
+                    } else {
                         hideProgressBAr();
                         Log.d("HCL", "login failed");
                         Toast.makeText(LoginActivity.this, "Try again..", Toast.LENGTH_SHORT).show();
                     }
 
-                }else{
+                } else {
                     hideProgressBAr();
                     Log.d("HCL", "login failed");
                     Toast.makeText(LoginActivity.this, "Try again..", Toast.LENGTH_SHORT).show();
@@ -128,6 +147,45 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.button_login:
                 OnLoginClick();
                 break;
+        }
+    }
+
+    String[] PERMISSIONS = {
+            android.Manifest.permission.MODIFY_AUDIO_SETTINGS,
+            android.Manifest.permission.RECORD_AUDIO,
+            android.Manifest.permission.CAMERA
+    };
+
+    private boolean checkPermission() {
+        for (String permission : PERMISSIONS) {
+            if (ActivityCompat.checkSelfPermission(LoginActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    int PERMISSION_ALL = 1;
+
+    private void getPerMission() {
+
+        if (!checkPermission()) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_ALL) {
+            if (grantResults.length > 0) {
+                String permissionsDenied = "";
+                for (String per : PERMISSIONS) {
+                    if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                        permissionsDenied += "\n" + per;
+                    }
+                }
+            }
         }
     }
 }
