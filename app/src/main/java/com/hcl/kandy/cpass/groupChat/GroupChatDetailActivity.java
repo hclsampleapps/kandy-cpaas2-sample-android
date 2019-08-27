@@ -51,6 +51,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import static com.hcl.kandy.cpass.groupChat.GroupChatFragment.chatService;
 
 //import static com.rbbn.cpaas.mobile.demo_java.ui.messaging.groupchat.GroupChatFragment.chatService;
@@ -117,7 +118,7 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
         if (chatService == null)
             initChatService(this);
 
-       // CPaaSManager.getInstance().getcPaaSChatManager().setContext(this);
+        // CPaaSManager.getInstance().getcPaaSChatManager().setContext(this);
 
         attachments = new ArrayList<>();
 
@@ -180,11 +181,13 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
+
     private void initChatService(@NonNull Context context) {
         App applicationContext = (App) context.getApplicationContext();
         CPaaS cpass = applicationContext.getCpass();
         chatService = cpass.getChatService();
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -206,10 +209,12 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
                     isComposing = false;
                     chatConversation.sendGroupChatComposing(false, new MessagingCallback() {
                         @Override
-                        public void onSuccess() {}
+                        public void onSuccess() {
+                        }
 
                         @Override
-                        public void onFail(MobileError error) {}
+                        public void onFail(MobileError error) {
+                        }
                     });
                     if (mComposingTimer != null)
                         mComposingTimer.cancel();
@@ -224,10 +229,13 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
             isComposing = true;
             chatConversation.sendGroupChatComposing(true, new MessagingCallback() {
                 @Override
-                public void onSuccess() { isComposingActive(); }
+                public void onSuccess() {
+                    isComposingActive();
+                }
 
                 @Override
-                public void onFail(MobileError error) {}
+                public void onFail(MobileError error) {
+                }
             });
         }
         return super.onKeyUp(keyCode, event);
@@ -388,19 +396,21 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
             // notify the backend that the message was displayed
             chatConversation.sendGroupChatDisplayed(message.getMessageId(), new MessagingCallback() {
                 @Override
-                public void onSuccess() {}
+                public void onSuccess() {
+                }
 
                 @Override
-                public void onFail(MobileError error) {}
+                public void onFail(MobileError error) {
+                }
             });
-        }else {
+        } else {
             Log.d(TAG, "GroupChat is not for this Group. - screen groupId: " + groupId);
         }
     }
 
     public void handleChatDeliveryStatusChanged(String participant, String deliveryStatus, String messageID) {
 //        if (!participant.equals(this.participant)) {
-            // ignore this if the participant isn't for the current conversation
+        // ignore this if the participant isn't for the current conversation
 //            return;
 //        }
 
@@ -419,7 +429,7 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
 //        String participant = message.getDestinationAddress();
 
 //        if (!participant.equals(this.participant)) {
-            // ignore this if the participant isn't for the current conversation
+        // ignore this if the participant isn't for the current conversation
 //            return;
 //        }
 

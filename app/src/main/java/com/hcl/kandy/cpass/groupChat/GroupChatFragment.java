@@ -61,7 +61,8 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
     public GroupChatFragment() {
         // Required empty public constructor
     }
-// new
+
+    // new
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +71,7 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
             initChatService(context);
     }
 
-// new
+    // new
     private void initChatService(@NonNull Context context) {
         App applicationContext = (App) context.getApplicationContext();
         CPaaS cpass = applicationContext.getCpass();
@@ -119,7 +120,7 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
         // This gets called when entering the fragment, or when coming back to the fragment from another activity
         super.onResume();
 
-       // chatService = getService();
+        chatService = getService();
 
         if (chatService != null) {
             fetchGroups();
@@ -128,7 +129,10 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-   // public ChatService getService() { return CPaaSManager.getInstance().getcPaaS().getChatService(); }
+    public ChatService getService() {
+        App applicationContext = (App) getContext().getApplicationContext();
+        return applicationContext.getCpass().getChatService();
+    }
 
     @Override
     public void onClick(View view) {
@@ -317,7 +321,8 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
         alert.setTitle("Group Members");
         alert.setView(container);
 
-        alert.setPositiveButton("Close", (dialog, whichButton) -> {});
+        alert.setPositiveButton("Close", (dialog, whichButton) -> {
+        });
 
         alert.show();
     }
