@@ -265,6 +265,7 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
                 public void onSuccess() {
                     uri = null;
                     showMessage("Success");
+                    hideProgressBAr();
                     Log.d("CPaaS.ChatService", "Message is sent");
                 }
 
@@ -338,6 +339,7 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
                     showMessage("Enter Message");
                     return;
                 }
+                showProgressBar("");
                 sendMessage(mEtDestination.getText().toString(), mEtMessage.getText().toString());
                 break;
             case R.id.btnStartAttach:

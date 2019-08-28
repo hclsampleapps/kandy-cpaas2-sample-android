@@ -5,20 +5,20 @@
     android:layout_marginRight="50dip"
     android:layout_marginBottom="5dip">
 
-    <ImageView
-        android:id="@+id/attachment_sent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/linearMessageLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/attachment_sent"
         android:background="@drawable/chat_left"
         android:orientation="vertical"
         android:paddingLeft="10dip"
         android:paddingBottom="24dp">
+        <ImageView
+            android:id="@+id/attachment_sent"
+            android:layout_width="70dip"
+            android:layout_margin="10dip"
+            android:layout_height="70dip" />
 
         <TextView
             android:id="@+id/txtDestination"

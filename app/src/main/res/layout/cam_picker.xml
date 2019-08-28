@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -9,30 +10,30 @@
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/frontCam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Front Cam"
-            android:id="@+id/frontCam"
-            android:checked="true" />
+            android:checked="true"
+            android:text="Front Cam" />
 
         <RadioButton
+            android:id="@+id/backCam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back Cam"
-            android:id="@+id/backCam"
-            android:checked="false" />
+            android:checked="false"
+            android:text="Back Cam" />
     </RadioGroup>
 
     <Spinner
+        android:id="@+id/camResolutions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/camResolutions"
         android:layout_gravity="center_horizontal" />
 
     <Button
+        android:id="@+id/doneButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/doneButton" />
+        android:text="Done" />
 
 </LinearLayout>

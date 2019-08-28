@@ -24,13 +24,13 @@
         android:id="@+id/textViewCallType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="@android:color/white"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Calling"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/incomingcallCallerName" />
@@ -46,31 +46,30 @@
         <ImageButton
             android:id="@+id/incomingcallAcceptWithVideoButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
+            android:layout_weight="1"
             android:background="@null"
             android:text="Video" />
 
         <ImageButton
             android:id="@+id/incomingcallAcceptOnlyAudioButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="32dp"
             android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:layout_weight="1"
             android:background="@null"
             android:text="Audio" />
 
         <ImageButton
             android:id="@+id/incomingcallRejectButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="32dp"
             android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:layout_weight="1"
             android:background="@null"
             android:text="Reject" />
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

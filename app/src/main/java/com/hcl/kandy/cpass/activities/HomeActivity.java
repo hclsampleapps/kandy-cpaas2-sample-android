@@ -28,10 +28,6 @@ import com.hcl.kandy.cpass.fragments.SMSFragment;
 import com.hcl.kandy.cpass.models.MultimediaChatModelChatModel;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
 
-
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

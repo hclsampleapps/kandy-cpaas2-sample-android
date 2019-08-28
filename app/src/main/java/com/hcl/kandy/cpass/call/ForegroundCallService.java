@@ -126,9 +126,9 @@ public class ForegroundCallService extends IntentService {
 
             int importance = NotificationManager.IMPORTANCE_MIN;
             NotificationChannel channel = new NotificationChannel
-                        ("ActiveCall", "ActiveCall", importance);
-                channel.setDescription("ActiveCall notification");
-                channel.enableVibration(true);
+                    ("ActiveCall", "ActiveCall", importance);
+            channel.setDescription("ActiveCall notification");
+            channel.enableVibration(true);
 
             if (notifManager != null) {
                 notifManager.createNotificationChannel(channel);

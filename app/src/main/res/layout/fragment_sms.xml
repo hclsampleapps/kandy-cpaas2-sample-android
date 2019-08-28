@@ -8,23 +8,23 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-     <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etSenderAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Sender address"
-            android:maxLines="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etSenderAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Sender address"
+        android:maxLines="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
-	<android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etDestainationAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Destination address"
-            android:maxLines="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etDestainationAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Destination address"
+        android:maxLines="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleView"

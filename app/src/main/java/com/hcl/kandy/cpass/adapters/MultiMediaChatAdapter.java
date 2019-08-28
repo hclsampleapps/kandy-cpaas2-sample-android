@@ -108,7 +108,8 @@ public class MultiMediaChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 myViewHolder.message.setText(chatModel.getMessageTxt());
                 if (chatModel.getParts() != null && chatModel.getParts().size() > 1) {
                     myViewHolder.attachment_sent.setVisibility(View.VISIBLE);
-                    downloadfile(chatModel.getParts().get(1).getFile().getThumbnailLink(), myViewHolder.attachment_sent,
+                    downloadfile(chatModel.getParts().get(1).getFile().getLink(),
+                            myViewHolder.attachment_sent,
                             chatModel.getParts().get(1).getFile().getName());
                 } else {
                     myViewHolder.attachment_sent.setVisibility(View.GONE);
@@ -124,7 +125,7 @@ public class MultiMediaChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 OtherViewHolder otherViewHolder = (OtherViewHolder) holder;
                 if (chatModel.getParts() != null && chatModel.getParts().size() > 1) {
                     otherViewHolder.attachment_sent.setVisibility(View.VISIBLE);
-                    downloadfile(chatModel.getParts().get(1).getFile().getThumbnailLink(), otherViewHolder.attachment_sent,
+                    downloadfile(chatModel.getParts().get(1).getFile().getLink(), otherViewHolder.attachment_sent,
                             chatModel.getParts().get(1).getFile().getName());
                 } else {
                     otherViewHolder.attachment_sent.setVisibility(View.GONE);

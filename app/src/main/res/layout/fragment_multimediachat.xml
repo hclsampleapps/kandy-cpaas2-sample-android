@@ -21,7 +21,6 @@
             android:hint="Enter destination address"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="nesonukuv1@nesonukuv.34mv.att.com"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
