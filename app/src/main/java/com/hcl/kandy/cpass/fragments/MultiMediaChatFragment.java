@@ -162,6 +162,7 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
             @Override
             public void outboundChatMessageSent(OutboundMessage outboundMessage) {
                 Log.d("CPaaS.ChatService", "Message is sent to " + outboundMessage.getSenderAddress());
+                hideProgressBAr();
 
                 MultimediaChatModelChatModel multimediaChatModelChatModel;
                 if (attachments.size() > 0) {
@@ -238,6 +239,7 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
                         @Override
                         public void onSuccess() {
                             uri = null;
+                            hideProgressBAr();
                             showMessage("Success");
                             Log.d("CPaaS.ChatService", "Message is sent");
                         }
@@ -245,6 +247,7 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
                         @Override
                         public void onFail(MobileError error) {
                             Log.d("CPaaS.ChatService", "Message is failed");
+                            hideProgressBAr();
                             showMessage("Try again later");
                         }
                     });
@@ -272,6 +275,7 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
                 @Override
                 public void onFail(MobileError error) {
                     Log.d("CPaaS.ChatService", "Message is failed");
+                    hideProgressBAr();
                     showMessage("Try again later");
                 }
             });

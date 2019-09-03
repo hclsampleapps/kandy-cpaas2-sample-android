@@ -32,6 +32,7 @@ public class BaseFragment extends Fragment {
 
 
     public void hideProgressBAr() {
+        if (loading!=null && loading.isShowing())
         loading.dismiss();
     }
 
