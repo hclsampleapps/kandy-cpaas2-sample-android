@@ -255,6 +255,7 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
 
                 @Override
                 public void uploadFail(String error) {
+                    hideProgressBAr();
                     Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
                 }
             };

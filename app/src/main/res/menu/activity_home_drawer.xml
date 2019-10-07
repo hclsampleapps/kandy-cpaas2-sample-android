@@ -5,10 +5,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_multimedia"
-            android:icon="@drawable/ic_chat"
-            android:title="Multimedia Chat" />
-        <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_chat"
             android:title="Chat" />
@@ -20,6 +16,10 @@
             android:id="@+id/nav_call"
             android:icon="@drawable/ic_call"
             android:title="Call" />
+        <item
+            android:id="@+id/nav_multimedia"
+            android:icon="@drawable/ic_chat"
+            android:title="Multimedia Chat" />
         <item
             android:id="@+id/nav_addressbook"
             android:icon="@drawable/ic_addressbook"
