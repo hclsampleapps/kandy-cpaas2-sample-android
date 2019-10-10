@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,19 +24,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     public static String access_token = "access_token";
     public static String id_token = "id_token";
     public static String base_url = "base_url";
+    public static String login_type = "login_type";
     String[] PERMISSIONS = {
             android.Manifest.permission.MODIFY_AUDIO_SETTINGS,
             android.Manifest.permission.RECORD_AUDIO,
-            android.Manifest.permission.CAMERA
-            ,
+            android.Manifest.permission.CAMERA,
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
             android.Manifest.permission.READ_EXTERNAL_STORAGE
     };
@@ -44,6 +43,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private TextView mEtUserPassword;
     private TextView mEtClient;
     private EditText mBaseUrl;
+
+    LinearLayout llPasswordGrant, llClientCredentials;
+    boolean isPasswordGrantLoginType;
+    private EditText mClientId, mClientSecret;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mEtUserPassword = findViewById(R.id.et_user_password);
         mEtClient = findViewById(R.id.et_user_client);
         mBaseUrl = findViewById(R.id.et_url);
+        llPasswordGrant = findViewById(R.id.ll_password_grant);
+        llClientCredentials = findViewById(R.id.ll_client_credentials);
+        mClientId = findViewById(R.id.et_client_id);
+        mClientSecret = findViewById(R.id.et_client_secret);
+        isPasswordGrantLoginType = true;
+        ((RadioGroup) findViewById(R.id.rg_login_type_selection))
+                .setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rb_password_grant) {
+                    isPasswordGrantLoginType = true;
+                    llPasswordGrant.setVisibility(View.VISIBLE);
+                    llClientCredentials.setVisibility(View.GONE);
+                } else {
+                    isPasswordGrantLoginType = false;
+                    llClientCredentials.setVisibility(View.VISIBLE);
+                    llPasswordGrant.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -64,16 +87,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private boolean validate() {
-        if (TextUtils.isEmpty(mBaseUrl.getText().toString()))
-            return false;
-        else if (TextUtils.isEmpty(mEtUserName.getText().toString()))
-            return false;
-        else if (TextUtils.isEmpty(mEtUserPassword.getText().toString()))
-            return false;
-        else if (TextUtils.isEmpty(mEtClient.getText().toString()))
-            return false;
-        else
-            return true;
+        if (isPasswordGrantLoginType) {
+            if (TextUtils.isEmpty(mBaseUrl.getText().toString()))
+                return false;
+            else if (TextUtils.isEmpty(mEtUserName.getText().toString()))
+                return false;
+            else if (TextUtils.isEmpty(mEtUserPassword.getText().toString()))
+                return false;
+            else if (TextUtils.isEmpty(mEtClient.getText().toString()))
+                return false;
+            else
+                return true;
+        } else {
+            if (TextUtils.isEmpty(mBaseUrl.getText().toString()))
+                return false;
+            else if (TextUtils.isEmpty(mClientId.getText().toString()))
+                return false;
+            else if (TextUtils.isEmpty(mClientSecret.getText().toString()))
+                return false;
+            else
+                return true;
+        }
     }
 
     private void OnLoginClick() {
@@ -101,16 +135,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             return;
         }
         showProgressBar("Login..");
-        Call<LoginResponse> responseCall = mRestApiInterface.loginAPI(
-                mEtUserName.getEditableText().toString(),
-                mEtUserPassword.getEditableText().toString(),
-                mEtClient.getEditableText().toString(),
-                "password",
-                "openid");
+
+        Call<LoginResponse> responseCall;
+        if (isPasswordGrantLoginType) {
+            responseCall = mRestApiInterface.loginAPI(
+                    mEtUserName.getText().toString(),
+                    mEtUserPassword.getText().toString(),
+                    mEtClient.getText().toString(),
+                    "password",
+                    "openid");
+        } else {
+            responseCall = mRestApiInterface.loginAPIProject(
+                    mClientId.getText().toString(),
+                    mClientSecret.getText().toString(),
+                    "client_credentials",
+                    "openid");
+        }
 
         responseCall.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+            public void onResponse(@NonNull Call<LoginResponse> call,
+                                   @NonNull Response<LoginResponse> response) {
                 LoginResponse body = response.body();
 
                 if (body != null) {
@@ -119,6 +164,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     intent.putExtra(access_token, body.getAccessToken());
                     intent.putExtra(id_token, body.getIdToken());
                     intent.putExtra(base_url, mBaseUrl.getText().toString());
+                    intent.putExtra(login_type, isPasswordGrantLoginType);
 
                     if (!isFinishing()) {
                         hideProgressBAr();

@@ -66,6 +66,12 @@ public class AddressbookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return contact.size();
     }
 
+    public interface AddressbookListner {
+        void onClickAddressBook(Contact contact);
+
+        void onDeleteAddressBook(Contact contact);
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, message;
         View addressbookContainer, deleteButton;
@@ -88,11 +94,6 @@ public class AddressbookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             });
         }
 
-    }
-
-    public interface AddressbookListner {
-        void onClickAddressBook(Contact contact);
-        void onDeleteAddressBook(Contact contact);
     }
 
 }

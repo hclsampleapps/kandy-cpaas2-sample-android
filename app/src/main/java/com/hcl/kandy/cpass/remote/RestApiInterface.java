@@ -19,4 +19,11 @@ public interface RestApiInterface {
                                  @Field("client_id") String client_id,
                                  @Field("grant_type") String grant_type,
                                  @Field("scope") String scope);
+
+    @FormUrlEncoded
+    @POST(API.LOGIN_URL)
+    Call<LoginResponse> loginAPIProject(@Field("client_id") String client_id,
+                                        @Field("client_secret") String client_secret,
+                                        @Field("grant_type") String grant_type,
+                                        @Field("scope") String scope);
 }
