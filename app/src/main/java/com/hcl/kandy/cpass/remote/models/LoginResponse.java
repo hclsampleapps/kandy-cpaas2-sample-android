@@ -2,9 +2,6 @@ package com.hcl.kandy.cpass.remote.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class LoginResponse {
     @SerializedName("access_token")
     private String accessToken;

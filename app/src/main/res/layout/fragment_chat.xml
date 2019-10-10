@@ -14,8 +14,7 @@
         android:hint="Enter destination address"
         android:maxLines="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:text="ashish08@hcl107.MPb0QLfe.att.com" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleView"

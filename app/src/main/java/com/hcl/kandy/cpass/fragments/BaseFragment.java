@@ -10,9 +10,6 @@ import android.view.View;
 
 import com.hcl.kandy.cpass.R;
 
-/**
- * Created by Ashish Goel on 2/4/2019.
- */
 public class BaseFragment extends Fragment {
     ProgressDialog loading = null;
 
@@ -32,7 +29,8 @@ public class BaseFragment extends Fragment {
 
 
     public void hideProgressBAr() {
-        loading.dismiss();
+        if (loading != null && loading.isShowing())
+            loading.dismiss();
     }
 
     public void showProgressBar(String message) {

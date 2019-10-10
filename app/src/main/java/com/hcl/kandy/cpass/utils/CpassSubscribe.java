@@ -15,9 +15,6 @@ import com.rbbn.cpaas.mobile.utilities.services.ServiceType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class CpassSubscribe {
     @NonNull
     private static List<ServiceInfo> getServiceInfos() {

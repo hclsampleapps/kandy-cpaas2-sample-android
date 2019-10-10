@@ -11,10 +11,6 @@ import android.view.View;
 
 import com.hcl.kandy.cpass.R;
 
-
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 @SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
 

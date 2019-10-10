@@ -30,9 +30,6 @@ import com.rbbn.cpaas.mobile.utilities.services.ServiceType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Aman on 2/5/2019.
- */
 public class SMSFragment extends BaseFragment implements View.OnClickListener {
     private SMSService smsService;
     private EditText mEtDestination, mEtSender;
@@ -40,6 +37,7 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
     private RecyclerView mRecyclerView;
     private SMSAdapter mSMSAdapter;
     private ArrayList<SMSModel> mSMSModels;
+
     public SMSFragment() {
     }
 

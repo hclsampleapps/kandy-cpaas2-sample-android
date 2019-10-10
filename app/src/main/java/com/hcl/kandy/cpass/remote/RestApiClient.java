@@ -5,10 +5,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class RestApiClient {
     private static Retrofit retrofit = null;
 

@@ -23,8 +23,8 @@ public class ConfigurationHelper {
 //        configuration.setICEServers(iceServers);
 
         CodecSet codecSet = new CodecSet();
-        codecSet.audioCodecs = new CodecSet.AudioCodecType[]{CodecSet.AudioCodecType.AC_G722, CodecSet.AudioCodecType.AC_OPUS};
-        codecSet.videoCodecs = new CodecSet.VideoCodecType[]{CodecSet.VideoCodecType.VC_H264, CodecSet.VideoCodecType.VC_VP9};
+//        codecSet.audioCodecs = new CodecSet.AudioCodecType[]{CodecSet.AudioCodecType.AC_G722, CodecSet.AudioCodecType.AC_OPUS};
+//        codecSet.videoCodecs = new CodecSet.VideoCodecType[]{CodecSet.VideoCodecType.VC_H264, CodecSet.VideoCodecType.VC_VP9};
         configuration.setPreferredCodecSet(codecSet);
     }
 }

@@ -25,8 +25,7 @@
             android:layout_height="wrap_content"
             android:maxEms="16"
             android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
-            tools:text="ashish08@idx4.com" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/txtMessage"

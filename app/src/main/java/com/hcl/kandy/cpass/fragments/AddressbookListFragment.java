@@ -27,9 +27,6 @@ import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ashish Goel on 2/4/2019.
- */
 public class AddressbookListFragment extends BaseFragment implements View.OnClickListener, AddressbookAdapter.AddressbookListner {
     private AddressBookService mAddressBookService;
 
