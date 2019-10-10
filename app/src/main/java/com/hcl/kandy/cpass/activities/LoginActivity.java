@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hcl.kandy.cpass.R;
@@ -32,15 +33,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     String[] PERMISSIONS = {
             android.Manifest.permission.MODIFY_AUDIO_SETTINGS,
             android.Manifest.permission.RECORD_AUDIO,
-            android.Manifest.permission.CAMERA
+            android.Manifest.permission.CAMERA,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.READ_EXTERNAL_STORAGE
     };
     int PERMISSION_ALL = 1;
     LinearLayout llPasswordGrant, llClientCredentials;
     boolean isPasswordGrantLoginType;
     private RestApiInterface mRestApiInterface;
-    private EditText mEtUserName;
-    private EditText mEtUserPassword;
-    private EditText mEtClient;
+    private TextView mEtUserName;
+    private TextView mEtUserPassword;
+    private TextView mEtClient;
     private EditText mBaseUrl;
     private EditText mClientId, mClientSecret;
 
@@ -61,19 +64,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         isPasswordGrantLoginType = true;
         ((RadioGroup) findViewById(R.id.rg_login_type_selection))
                 .setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.rb_password_grant) {
-                    isPasswordGrantLoginType = true;
-                    llPasswordGrant.setVisibility(View.VISIBLE);
-                    llClientCredentials.setVisibility(View.GONE);
-                } else {
-                    isPasswordGrantLoginType = false;
-                    llClientCredentials.setVisibility(View.VISIBLE);
-                    llPasswordGrant.setVisibility(View.GONE);
-                }
-            }
-        });
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        if (checkedId == R.id.rb_password_grant) {
+                            isPasswordGrantLoginType = true;
+                            llPasswordGrant.setVisibility(View.VISIBLE);
+                            llClientCredentials.setVisibility(View.GONE);
+                        } else {
+                            isPasswordGrantLoginType = false;
+                            llClientCredentials.setVisibility(View.VISIBLE);
+                            llPasswordGrant.setVisibility(View.GONE);
+                        }
+                    }
+                });
     }
 
     @Override
@@ -203,7 +206,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private boolean checkPermission() {
         for (String permission : PERMISSIONS) {
-            if (ActivityCompat.checkSelfPermission(LoginActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(LoginActivity.this, permission)
+                    != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }

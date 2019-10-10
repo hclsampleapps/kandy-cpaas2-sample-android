@@ -12,9 +12,6 @@ import com.hcl.kandy.cpass.models.SMSModel;
 
 import java.util.ArrayList;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 @SuppressWarnings("ConstantConditions")
 public class SMSAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final static int CHAT_TYPE_ME = 1;

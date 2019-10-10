@@ -28,8 +28,7 @@
             android:textAlignment="viewEnd"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp"
-            android:visibility="gone"
-            tools:text="ashish08@idx4.com" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/txtMessage"

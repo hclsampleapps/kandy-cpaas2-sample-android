@@ -12,9 +12,6 @@ import com.rbbn.cpaas.mobile.utilities.Globals;
 import com.rbbn.cpaas.mobile.utilities.exception.MobileException;
 import com.rbbn.cpaas.mobile.utilities.logging.LogLevel;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class App extends Application {
 
     private CPaaS mCpaas;

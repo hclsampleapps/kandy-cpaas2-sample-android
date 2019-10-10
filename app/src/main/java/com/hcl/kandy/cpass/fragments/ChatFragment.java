@@ -30,9 +30,6 @@ import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class ChatFragment extends BaseFragment implements View.OnClickListener {
 
     private ChatService chatService;
