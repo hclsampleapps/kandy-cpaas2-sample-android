@@ -43,9 +43,6 @@ import java.util.List;
 
 import static com.rbbn.cpaas.mobile.utilities.security.TLSSocketFactory.TAG;
 
-/**
- * Created by Ashish Goel on 2/4/2019.
- */
 public class PresenceFragment extends BaseFragment implements PresenceListener, View.OnClickListener {
     private PresenceService mPresenceService;
     private PresenceSource myPresenceSource;

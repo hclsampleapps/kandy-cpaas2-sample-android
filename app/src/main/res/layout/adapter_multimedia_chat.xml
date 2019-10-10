@@ -14,11 +14,12 @@
         android:orientation="vertical"
         android:paddingLeft="10dip"
         android:paddingBottom="24dp">
+
         <ImageView
             android:id="@+id/attachment_sent"
             android:layout_width="70dip"
-            android:layout_margin="10dip"
-            android:layout_height="70dip" />
+            android:layout_height="70dip"
+            android:layout_margin="10dip" />
 
         <TextView
             android:id="@+id/txtDestination"

@@ -20,12 +20,10 @@ import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
 import com.hcl.kandy.cpass.call.CallFragment;
 import com.hcl.kandy.cpass.fragments.AddressbookListFragment;
-import com.hcl.kandy.cpass.fragments.CallFragment1;
 import com.hcl.kandy.cpass.fragments.ChatFragment;
 import com.hcl.kandy.cpass.fragments.MultiMediaChatFragment;
 import com.hcl.kandy.cpass.fragments.PresenceFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
-import com.hcl.kandy.cpass.models.MultimediaChatModelChatModel;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
 
 public class HomeActivity extends BaseActivity
@@ -39,6 +37,7 @@ public class HomeActivity extends BaseActivity
     Fragment multimediaChatFragment = MultiMediaChatFragment.newInstance();
     Toolbar toolbar;
     boolean isPasswordGrantLoginType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +114,8 @@ public class HomeActivity extends BaseActivity
 
             item.setChecked(true);
             invalidateOptionsMenu();
-        }  if (id == R.id.nav_chat) {
+        }
+        if (id == R.id.nav_chat) {
             fragmentTransaction
                     .replace(R.id.container, chatFragment).commit();
 

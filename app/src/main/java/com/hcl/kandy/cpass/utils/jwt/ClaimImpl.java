@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Ashish Goel on 2/1/2019.
  * The ClaimImpl class implements the Claim interface.
  */
 @SuppressWarnings("WeakerAccess")

@@ -12,9 +12,6 @@ import com.rbbn.cpaas.mobile.addressbook.model.Contact;
 
 import java.util.List;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 @SuppressWarnings("ConstantConditions")
 public class AddressbookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final static int CONTACT_TYPE = 1;

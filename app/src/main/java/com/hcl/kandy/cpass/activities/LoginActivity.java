@@ -38,14 +38,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             android.Manifest.permission.READ_EXTERNAL_STORAGE
     };
     int PERMISSION_ALL = 1;
+    LinearLayout llPasswordGrant, llClientCredentials;
+    boolean isPasswordGrantLoginType;
     private RestApiInterface mRestApiInterface;
     private TextView mEtUserName;
     private TextView mEtUserPassword;
     private TextView mEtClient;
     private EditText mBaseUrl;
-
-    LinearLayout llPasswordGrant, llClientCredentials;
-    boolean isPasswordGrantLoginType;
     private EditText mClientId, mClientSecret;
 
     @Override
@@ -65,19 +64,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         isPasswordGrantLoginType = true;
         ((RadioGroup) findViewById(R.id.rg_login_type_selection))
                 .setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.rb_password_grant) {
-                    isPasswordGrantLoginType = true;
-                    llPasswordGrant.setVisibility(View.VISIBLE);
-                    llClientCredentials.setVisibility(View.GONE);
-                } else {
-                    isPasswordGrantLoginType = false;
-                    llClientCredentials.setVisibility(View.VISIBLE);
-                    llPasswordGrant.setVisibility(View.GONE);
-                }
-            }
-        });
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        if (checkedId == R.id.rb_password_grant) {
+                            isPasswordGrantLoginType = true;
+                            llPasswordGrant.setVisibility(View.VISIBLE);
+                            llClientCredentials.setVisibility(View.GONE);
+                        } else {
+                            isPasswordGrantLoginType = false;
+                            llClientCredentials.setVisibility(View.VISIBLE);
+                            llPasswordGrant.setVisibility(View.GONE);
+                        }
+                    }
+                });
     }
 
     @Override

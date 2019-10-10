@@ -7,13 +7,14 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
 
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
 
             <TextView
@@ -38,17 +39,19 @@
                 android:layout_height="wrap_content"
                 android:checkedButton="@id/rb_password_grant"
                 android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/rb_password_grant"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Password Grant"></RadioButton>
+
                 <RadioButton
                     android:id="@+id/rb_client_credentials"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Client Credentials"></RadioButton>
 
             </RadioGroup>
@@ -58,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_user_name"
                     android:layout_width="match_parent"
@@ -66,31 +70,33 @@
                     android:text="@string/enter_user_name" />
 
 
-
                 <EditText
                     android:id="@+id/et_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="abcd@xyz.com"/>
+                    android:hint="abcd@xyz.com" />
 
                 <TextView
                     android:id="@+id/tv_user_password"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/enter_user_password" />
+
                 <EditText
                     android:id="@+id/et_user_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:text="Test@123" />
+
                 <TextView
                     android:id="@+id/tv_user_client"
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/enter_user_client"/>
+                    android:layout_marginTop="8dp"
+                    android:text="@string/enter_user_client" />
+
                 <EditText
                     android:id="@+id/et_user_client"
                     android:layout_width="match_parent"
@@ -98,18 +104,21 @@
                     android:hint="PUB-test123" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_client_credentials"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
+
                 <TextView
                     android:id="@+id/tv_client_id"
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/enter_private_project_key"/>
+                    android:layout_marginTop="8dp"
+                    android:text="@string/enter_private_project_key" />
+
                 <EditText
                     android:id="@+id/et_client_id"
                     android:layout_width="match_parent"
@@ -119,9 +128,10 @@
                 <TextView
                     android:id="@+id/tv_client_secret"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/enter_private_project_secret" />
+
                 <EditText
                     android:id="@+id/et_client_secret"
                     android:layout_width="match_parent"

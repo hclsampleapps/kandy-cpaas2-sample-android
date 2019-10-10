@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Ashish Goel on 2/1/2019.
  * Wrapper class for values contained inside a Json Web Token (JWT).
  */
 @SuppressWarnings("ALL")

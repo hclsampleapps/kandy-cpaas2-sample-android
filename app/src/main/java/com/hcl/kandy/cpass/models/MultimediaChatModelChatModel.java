@@ -4,9 +4,6 @@ import com.rbbn.cpaas.mobile.messaging.api.Part;
 
 import java.util.List;
 
-/**
- * Created by Aman Gupta on 25/5/2019.
- */
 public class MultimediaChatModelChatModel {
     private String messageTxt;
     private String destination;//detstination email address

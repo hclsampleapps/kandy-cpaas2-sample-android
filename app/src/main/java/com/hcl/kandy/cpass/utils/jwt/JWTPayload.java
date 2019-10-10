@@ -6,9 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 class JWTPayload {
 
     final String iss;

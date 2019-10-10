@@ -8,9 +8,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public interface RestApiInterface {
     @FormUrlEncoded
     @POST(API.LOGIN_URL)
