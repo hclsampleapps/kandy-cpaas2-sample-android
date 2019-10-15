@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
         applicationId "com.hcl.kandy.cpass"
@@ -41,5 +41,5 @@ dependencies {
     implementation "com.mikepenz:iconics-core:3.0.4@aar"
     implementation 'com.mikepenz:google-material-typeface:3.0.1.2.original@aar'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
+    implementation "com.github.bumptech.glide:glide:4.9.0"
 }

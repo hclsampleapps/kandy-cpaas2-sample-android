@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Ashish Goel on 2/1/2019.
  * The BaseClaim class is a Claim implementation that returns null when any of it's methods it's called.
  */
 class BaseClaim implements Claim {

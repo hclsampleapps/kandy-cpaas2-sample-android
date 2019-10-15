@@ -12,9 +12,6 @@ import com.rbbn.cpaas.mobile.addressbook.model.Contact;
 
 import java.util.List;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 @SuppressWarnings("ConstantConditions")
 public class AddressbookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final static int CONTACT_TYPE = 1;
@@ -66,6 +63,12 @@ public class AddressbookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return contact.size();
     }
 
+    public interface AddressbookListner {
+        void onClickAddressBook(Contact contact);
+
+        void onDeleteAddressBook(Contact contact);
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, message;
         View addressbookContainer, deleteButton;
@@ -88,11 +91,6 @@ public class AddressbookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             });
         }
 
-    }
-
-    public interface AddressbookListner {
-        void onClickAddressBook(Contact contact);
-        void onDeleteAddressBook(Contact contact);
     }
 
 }

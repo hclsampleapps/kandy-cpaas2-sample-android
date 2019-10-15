@@ -16,9 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 class JWTDeserializer implements JsonDeserializer<JWTPayload> {
     @Override
     public JWTPayload deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

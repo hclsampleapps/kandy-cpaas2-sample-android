@@ -21,9 +21,6 @@ import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 
 import java.util.List;
 
-/**
- * Created by Ashish Goel on 2/4/2019.
- */
 public class AddressbookFragment extends BaseFragment implements View.OnClickListener {
     private AddressBookService mAddressBookService;
     private EditText mEtPrimaryContact;
@@ -108,14 +105,14 @@ public class AddressbookFragment extends BaseFragment implements View.OnClickLis
         });
     }
 
-    private void getAllContact(){
+    private void getAllContact() {
         mAddressBookService.retrieveContactList("default", new RetrieveContactsCallback() {
             @Override
             public void onSuccess(List<Contact> list) {
                 Log.d("HCL", "got list of conatct");
                 for (Contact item :
-                     list) {
-                   Log.d("HCL" ,item.getEmailAddress());
+                        list) {
+                    Log.d("HCL", item.getEmailAddress());
                 }
             }
 

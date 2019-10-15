@@ -12,13 +12,13 @@
 
     <RelativeLayout
         android:layout_width="0dp"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/chat_right"
         android:paddingLeft="8dp"
-        android:paddingRight="12dp"
         android:paddingTop="8dp"
+        android:paddingRight="12dp"
         android:paddingBottom="24dp"
-        android:layout_height="wrap_content">
+        app:layout_constraintRight_toRightOf="parent">
 
         <TextView
             android:id="@+id/txtDestination"
@@ -26,19 +26,18 @@
             android:layout_height="wrap_content"
             android:maxEms="16"
             android:textAlignment="viewEnd"
-            android:visibility="gone"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp"
-            tools:text="ashish08@idx4.com" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/txtMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxEms="16"
             android:textAlignment="viewEnd"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:maxEms="16"
             tools:text="Hi from Text wfger gregu tguetgh tghetuoghe tge tget " />
 
     </RelativeLayout>

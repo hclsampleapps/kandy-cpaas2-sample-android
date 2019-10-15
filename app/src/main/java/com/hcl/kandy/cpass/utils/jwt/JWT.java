@@ -17,16 +17,25 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Ashish Goel on 2/1/2019.
  * Wrapper class for values contained inside a Json Web Token (JWT).
  */
 @SuppressWarnings("ALL")
 public class JWT implements Parcelable {
 
+    public static final Creator<JWT> CREATOR = new Creator<JWT>() {
+        @Override
+        public JWT createFromParcel(Parcel in) {
+            return new JWT(in.readString());
+        }
+
+        @Override
+        public JWT[] newArray(int size) {
+            return new JWT[size];
+        }
+    };
     private static final String TAG = JWT.class.getSimpleName();
     private static final String ENCODING_UTF_8 = "UTF-8";
     private final String token;
-
     private Map<String, String> header;
     private JWTPayload payload;
     private String signature;
@@ -40,6 +49,12 @@ public class JWT implements Parcelable {
     public JWT(@NonNull String token) {
         decode(token);
         this.token = token;
+    }
+
+    static Gson getGson() {
+        return new GsonBuilder()
+                .registerTypeAdapter(JWTPayload.class, new JWTDeserializer())
+                .create();
     }
 
     /**
@@ -186,26 +201,14 @@ public class JWT implements Parcelable {
         return 0;
     }
 
+    // =====================================
+    // ===========Private Methods===========
+    // =====================================
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(token);
     }
-
-    public static final Creator<JWT> CREATOR = new Creator<JWT>() {
-        @Override
-        public JWT createFromParcel(Parcel in) {
-            return new JWT(in.readString());
-        }
-
-        @Override
-        public JWT[] newArray(int size) {
-            return new JWT[size];
-        }
-    };
-
-    // =====================================
-    // ===========Private Methods===========
-    // =====================================
 
     private void decode(String token) {
         final String[] parts = splitToken(token);
@@ -250,11 +253,5 @@ public class JWT implements Parcelable {
             throw new DecodeException("The token's payload had an invalid JSON format.", e);
         }
         return payload;
-    }
-
-    static Gson getGson() {
-        return new GsonBuilder()
-                .registerTypeAdapter(JWTPayload.class, new JWTDeserializer())
-                .create();
     }
 }

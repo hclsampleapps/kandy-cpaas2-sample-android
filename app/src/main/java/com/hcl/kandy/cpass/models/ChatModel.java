@@ -1,8 +1,5 @@
 package com.hcl.kandy.cpass.models;
 
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class ChatModel {
     private String messageTxt;
     private String destination;//detstination email address

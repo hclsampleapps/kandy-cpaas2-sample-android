@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:hint="Enter destination address"
         android:maxLines="1"
-        tools:text="ashish08@hcl107.MPb0QLfe.att.com"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

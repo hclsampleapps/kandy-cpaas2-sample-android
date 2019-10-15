@@ -38,7 +38,6 @@ import com.rbbn.cpaas.mobile.call.api.CallState;
 import com.rbbn.cpaas.mobile.call.api.MediaAttributes;
 import com.rbbn.cpaas.mobile.core.webrtc.view.VideoView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;

@@ -20,17 +20,13 @@ import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
 import com.hcl.kandy.cpass.call.CallFragment;
 import com.hcl.kandy.cpass.fragments.AddressbookListFragment;
-import com.hcl.kandy.cpass.fragments.CallFragment1;
 import com.hcl.kandy.cpass.fragments.ChatFragment;
+import com.hcl.kandy.cpass.fragments.MultiMediaChatFragment;
 import com.hcl.kandy.cpass.fragments.PresenceFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
 import com.hcl.kandy.cpass.groupChat.GroupChatFragment;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
 
-
-/**
- * Created by Ashish Goel on 2/1/2019.
- */
 public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,8 +35,10 @@ public class HomeActivity extends BaseActivity
     Fragment callFragment = CallFragment.newInstance();
     Fragment presenceFragment = PresenceFragment.newInstance();
     Fragment addressbookFragment = AddressbookListFragment.newInstance();
+    Fragment multimediaChatFragment = MultiMediaChatFragment.newInstance();
     Fragment groupChatFragment = new GroupChatFragment();
     Toolbar toolbar;
+    boolean isPasswordGrantLoginType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +66,7 @@ public class HomeActivity extends BaseActivity
             idToken = extras.getString(LoginActivity.id_token);
             accessToken = extras.getString(LoginActivity.access_token);
             baseUrl = extras.getString(LoginActivity.base_url);
+            isPasswordGrantLoginType = extras.getBoolean(LoginActivity.login_type);
         }
 
         App app = (App) getApplicationContext();
@@ -106,6 +105,17 @@ public class HomeActivity extends BaseActivity
 
         int id = item.getItemId();
 
+        if (id == R.id.nav_multimedia) {
+            fragmentTransaction
+                    .replace(R.id.container, multimediaChatFragment).commit();
+
+            ActionBar supportActionBar = getSupportActionBar();
+            if (supportActionBar != null)
+                supportActionBar.setTitle("Multimedia App");
+
+            item.setChecked(true);
+            invalidateOptionsMenu();
+        }
         if (id == R.id.nav_chat) {
             fragmentTransaction
                     .replace(R.id.container, chatFragment).commit();
