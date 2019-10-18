@@ -21,10 +21,6 @@ import android.widget.Toast;
 
 import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
-import com.hcl.kandy.cpass.fragments.ChatFragment;
-//import com.rbbn.cpaas.mobile.demo_java.CPaaSManager;
-import static com.hcl.kandy.cpass.groupChat.GroupChatFragment.chatService;
-
 import com.rbbn.cpaas.mobile.CPaaS;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
@@ -37,26 +33,23 @@ import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hcl.kandy.cpass.groupChat.GroupChatFragment.chatService;
+
+//import com.rbbn.cpaas.mobile.demo_java.CPaaSManager;
+
 
 public class GroupInfoActivity extends AppCompatActivity {
     private static final String TAG = "GroupInfoActivity";
-
+    protected GroupMembersAdapter groupMembersAdapter;
+    protected List<ChatGroupParticipant> memberList = new ArrayList<>();
     String groupId, groupName, groupSubject, participant;
-
-    private ChatConversation conversation = null;
-
     boolean newGroup = true;
     boolean extendingOneToOne = false;
     boolean readOnly = false;
-
     EditText nameEditText, subjectEditText;
-
     ListView membersListView;
-    protected GroupMembersAdapter groupMembersAdapter;
-    protected List<ChatGroupParticipant> memberList = new ArrayList<>();
-
     FloatingActionButton saveGroupInfoButton;
-
+    private ChatConversation conversation = null;
     private ChatGroupParticipant selectedChatGroupParticipant;
 
     @Override
@@ -80,38 +73,12 @@ public class GroupInfoActivity extends AppCompatActivity {
         participant = intent.getStringExtra("participant");
         extendingOneToOne = participant != null;
 
-//        if (extendingOneToOne) {
-//            for (ChatConversation c : ChatFragment.conversations) {
-//                if (c.getParticipant() != null && c.getParticipant().equals(participant)) {
-//                    conversation = c;
-//                }
-//            }
-//        }
-//
-//        readOnly = intent.getBooleanExtra("readOnly", false);
-//
-//        if (chatService == null)
-//            chatService = CPaaSManager.getInstance().getcPaaS().getChatService();
-//
-//        CPaaSManager.getInstance().getcPaaSChatManager().setContext(this);
-
-
-//        if (extendingOneToOne) {
-//            for (ChatConversation c : ChatFragment.conversations) {
-//                if (c.getParticipant() != null && c.getParticipant().equals(participant)) {
-//                    conversation = c;
-//                }
-//            }
-//        }
-
         readOnly = intent.getBooleanExtra("readOnly", false);
 
         if (chatService == null)
             initChatService(this);
 
-       // CPaaSManager.getInstance().getcPaaSChatManager().setContext(this);
-
-            setTitle("Options");
+        setTitle("Options");
 
         if (groupId.length() > 0) {
             // this is an existing group
@@ -162,11 +129,13 @@ public class GroupInfoActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
+
     private void initChatService(@NonNull Context context) {
         App applicationContext = (App) context.getApplicationContext();
         CPaaS cpass = applicationContext.getCpass();
         chatService = cpass.getChatService();
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

@@ -29,6 +29,47 @@ public class GroupChatMessageListAdapter extends RecyclerView.Adapter<GroupChatM
     protected Context context;
     private List<Message> messageList;
 
+    public GroupChatMessageListAdapter(Context context, List<Message> messageList) {
+        this.context = context;
+        this.messageList = messageList;
+    }
+
+    public void setMessageList(List<Message> list) {
+        messageList = list;
+    }
+
+    @Override
+    public int getItemCount() {
+        return messageList.size();
+    }
+
+    // Inflates the appropriate layout according to the ViewType.
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_group_chat_message, parent, false);
+
+        return new GroupChatMessageHolder(view);
+    }
+
+    // Passes the message object to a ViewHolder so that the contents can be bound to UI.
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Message message = messageList.get(position);
+        ((GroupChatMessageHolder) holder).bind(message);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(context, GroupChatMessageStatusDetailActivity.class);
+                intent.putExtra("messageText", message.getMessage());
+                intent.putExtra("messageId", message.getMessageId());
+                intent.putExtra("groupId", message.getDestinationAddress());
+                view.getContext().startActivity(intent);
+                return false;
+            }
+        });
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public RelativeLayout viewBackground, viewForeground;
 
@@ -59,8 +100,6 @@ public class GroupChatMessageListAdapter extends RecyclerView.Adapter<GroupChatM
                         }
                     });
                 } else {
-                    // file does not exist
-                    // set a temporary image to show that an image is there, and then add a click to download listener
                     imageView.setImageResource(android.R.drawable.ic_menu_gallery);
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -77,61 +116,6 @@ public class GroupChatMessageListAdapter extends RecyclerView.Adapter<GroupChatM
                 imageView.setVisibility(View.GONE);
             }
         }
-    }
-
-    public GroupChatMessageListAdapter(Context context, List<Message> messageList) {
-        this.context = context;
-        this.messageList = messageList;
-    }
-
-    public void setMessageList(List<Message> list) {
-        messageList = list;
-    }
-
-    @Override
-    public int getItemCount() {
-        return messageList.size();
-    }
-
-/*    // Determines the appropriate ViewType according to the sender of the message.
-    @Override
-    public int getItemViewType(int position) {
-        Message message = messageList.get(position);
-
-        if (message instanceof OutboundMessage) {
-            // If the current user is the sender of the message
-            return VIEW_TYPE_MESSAGE_SENT;
-        } else {
-            // If some other user sent the message
-            return VIEW_TYPE_MESSAGE_RECEIVED;
-        }
-    }
-*/
-    // Inflates the appropriate layout according to the ViewType.
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_group_chat_message, parent, false);
-
-        return new GroupChatMessageHolder(view);
-    }
-
-    // Passes the message object to a ViewHolder so that the contents can be bound to UI.
-    @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Message message = messageList.get(position);
-        ((GroupChatMessageHolder) holder).bind(message);
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intent = new Intent(context, GroupChatMessageStatusDetailActivity.class);
-                intent.putExtra("messageText", message.getMessage());
-                intent.putExtra("messageId", message.getMessageId());
-                intent.putExtra("groupId", message.getDestinationAddress());
-                view.getContext().startActivity(intent);
-                return false;
-            }
-        });
     }
 
     private class GroupChatMessageHolder extends MyViewHolder {

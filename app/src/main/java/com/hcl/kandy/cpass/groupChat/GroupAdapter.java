@@ -34,6 +34,7 @@ public class GroupAdapter extends ArrayAdapter<ChatGroup> {
         groupList.addAll(list);
         context.runOnUiThread(() -> this.notifyDataSetChanged());
     }
+
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
@@ -52,10 +53,8 @@ public class GroupAdapter extends ArrayAdapter<ChatGroup> {
 
         Log.i("GroupAdapter", "Adding group for " + name);
 
-        // Set the participant
         nameTextView.setText(name);
 
-        // Set the subject (or invited)
         if (group.isConnected()) {
             messageTextView.setText(subject);
             messageTextView.setTypeface(null, Typeface.NORMAL);

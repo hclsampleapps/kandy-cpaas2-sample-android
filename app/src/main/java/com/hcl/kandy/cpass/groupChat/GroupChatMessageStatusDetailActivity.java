@@ -21,19 +21,16 @@ import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatService;
 import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 
-import static com.hcl.kandy.cpass.groupChat.GroupChatFragment.chatService;
-
 
 public class GroupChatMessageStatusDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     protected static ChatService chatService;
-    protected ChatConversation chatConversation;
     protected static Message participantStatusReports;
-    private RecyclerView messageRecycler;
+    protected ChatConversation chatConversation;
     protected GroupChatStatusAdapter adapter;
     protected ImageView statusItemImageView;
     protected TextView statusTextView;
-
+    private RecyclerView messageRecycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +78,10 @@ public class GroupChatMessageStatusDetailActivity extends AppCompatActivity impl
     public void onClick(View view) {
 
     }
+
     private ChatService initChatService(@NonNull Context context) {
         App applicationContext = (App) context.getApplicationContext();
         CPaaS cpass = applicationContext.getCpass();
-       return  chatService = cpass.getChatService();
+        return chatService = cpass.getChatService();
     }
-//    public ChatService getService() { return CPaaSManager.getInstance().getcPaaS().getChatService(); }
 }

@@ -41,13 +41,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-//package com.rbbn.cpaas.mobile.demo_java.ui.messaging.groupchat;
-//import com.rbbn.cpaas.mobile.demo_java.CPaaSManager;
-//import com.rbbn.cpaas.mobile.demo_java.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GroupChatFragment extends Fragment implements View.OnClickListener {
 
     protected static ChatService chatService;
@@ -59,10 +53,8 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
     protected List<ChatGroup> groupList = new ArrayList<>();
 
     public GroupChatFragment() {
-        // Required empty public constructor
     }
 
-    // new
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +63,6 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
             initChatService(context);
     }
 
-    // new
     private void initChatService(@NonNull Context context) {
         App applicationContext = (App) context.getApplicationContext();
         CPaaS cpass = applicationContext.getCpass();
@@ -82,7 +73,6 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_groupchat, container, false);
 
         FloatingActionButton newGroupButton = view.findViewById(R.id.newGroupButton);
@@ -137,7 +127,6 @@ public class GroupChatFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if (chatService != null) {
-            // view is the button
             switch (view.getId()) {
                 case R.id.newGroupButton:
                     newGroup();

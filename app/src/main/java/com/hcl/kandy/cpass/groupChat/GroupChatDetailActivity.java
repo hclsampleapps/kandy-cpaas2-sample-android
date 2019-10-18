@@ -118,8 +118,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
         if (chatService == null)
             initChatService(this);
 
-        // CPaaSManager.getInstance().getcPaaSChatManager().setContext(this);
-
         attachments = new ArrayList<>();
 
         chatService.fetchGroupChatSession(groupId, new FetchConversationCallback() {
@@ -131,15 +129,11 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
                 if (max > 50)
                     max = 50;
 
-                // TODO: currently, the backend returns "max" oldest messages, because the backend returns them ordered oldest to newest
-
                 chatConversation.fetchGroupChatMessages(max, new FetchMessagesCallback() {
                     @Override
                     public void onSuccess(List<Message> messages) {
                         messageList = messages;
 
-                        // TODO: currently, the backend returns messages ordered from oldest to newest
-                        //       reverse the list so the messages are ordered from newest to oldest
                         Collections.reverse(messageList);
 
                         messageAdapter.setMessageList(messageList);
@@ -155,7 +149,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
 
             @Override
             public void onFail(MobileError error) {
-                // create a new conversation with the given participant
                 chatConversation = (ChatConversation) chatService.createConversation(groupId);
                 String sender = intent.getStringExtra("sender");
                 String destination = intent.getStringExtra("destination");
@@ -164,7 +157,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
                 long timestamp = intent.getLongExtra("timestamp", 0L);
 
                 if (sender.length() > 0 && messageId.length() > 0) {
-                    // if a message was specified in the intent, then add it to the message list
                     InboundMessage inboundMessage = new com.rbbn.cpaas.mobile.messaging.InboundMessage(sender, destination, messageId, message, timestamp);
                     messageList.add(0, inboundMessage);
                 }
@@ -245,9 +237,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof GroupChatMessageListAdapter.MyViewHolder) {
             String messageID = messageList.get(viewHolder.getAdapterPosition()).getMessageId();
-
-            // tell the backend to remove the message
-            // the message will be removed from the conversation object's message list
             chatConversation.deleteGroupChatMessage(messageID, new MessagingCallback() {
                 @Override
                 public void onSuccess() {
@@ -259,7 +248,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
                         }
                     }
 
-                    // remove the message from recycler view
                     runOnUiThread(() -> messageAdapter.notifyItemRemoved(position));
                 }
 
@@ -272,7 +260,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
     }
 
     private void hideKeyboard() {
-        // Check if no view has focus:
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -409,11 +396,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
     }
 
     public void handleChatDeliveryStatusChanged(String participant, String deliveryStatus, String messageID) {
-//        if (!participant.equals(this.participant)) {
-        // ignore this if the participant isn't for the current conversation
-//            return;
-//        }
-
         for (Message msg : messageList) {
             String id = msg.getMessageId();
             if (messageID != null && messageID.equals(id)) {
@@ -426,13 +408,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
     }
 
     public void handleOutboundChat(OutboundMessage message) {
-//        String participant = message.getDestinationAddress();
-
-//        if (!participant.equals(this.participant)) {
-        // ignore this if the participant isn't for the current conversation
-//            return;
-//        }
-
         String messageID = message.getMessageId();
         for (Message msg : messageList) {
             String id = msg.getMessageId();
@@ -496,8 +471,6 @@ public class GroupChatDetailActivity extends AppCompatActivity implements Recycl
         };
 
         TransferRequestHandle handle = chatService.downloadAttachment(url, folder, filename, progressCallback, downloadCompleteListener);
-        // You can cancel the download request by doing the following
-        //handle.cancel();
     }
 
     @Override

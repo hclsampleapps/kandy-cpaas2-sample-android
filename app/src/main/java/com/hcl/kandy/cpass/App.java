@@ -39,7 +39,6 @@ public class App extends Application {
 
         Configuration.getInstance().setUseSecureConnection(true);
         Configuration.getInstance().setRestServerUrl(baseUrl);
-//        Configuration.getInstance().setRestServerPort(8080);
         Configuration.getInstance().setLogLevel(LogLevel.TRACE);
         ConfigurationHelper.setConfigurations(baseUrl);
         Globals.setApplicationContext(context);

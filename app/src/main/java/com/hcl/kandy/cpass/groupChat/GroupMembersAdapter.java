@@ -16,7 +16,6 @@ import com.rbbn.cpaas.mobile.messaging.chat.api.ChatGroupParticipant;
 
 import java.util.List;
 
-//import com.rbbn.cpaas.mobile.demo_java.R;
 
 public class GroupMembersAdapter extends ArrayAdapter<ChatGroupParticipant> {
     private Activity context;

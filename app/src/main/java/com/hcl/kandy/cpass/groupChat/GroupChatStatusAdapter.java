@@ -73,9 +73,7 @@ public class GroupChatStatusAdapter extends RecyclerView.Adapter<GroupChatStatus
             if ("Displayed".equals(statusList.get(position))) {
                 itemImageView.setImageResource(R.drawable.ic_done_all_green_24dp);
             }
-
         }
-
     }
 }
 

@@ -166,8 +166,7 @@ public class HomeActivity extends BaseActivity
 
             item.setChecked(true);
             invalidateOptionsMenu();
-        }
-        else if (id == R.id.nav_group_chat) {
+        } else if (id == R.id.nav_group_chat) {
             fragmentTransaction
                     .replace(R.id.container, groupChatFragment).commit();
 
@@ -177,8 +176,7 @@ public class HomeActivity extends BaseActivity
 
             item.setChecked(true);
             invalidateOptionsMenu();
-        }
-        else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
             finish();
@@ -187,7 +185,7 @@ public class HomeActivity extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    //nav_group_chat
+
     private void setUserInfo(String idToken) {
         JWT jwt = new JWT(idToken);
         String email = jwt.getClaim("email").asString();
@@ -201,7 +199,6 @@ public class HomeActivity extends BaseActivity
         tvEmail.setText(email);
         tvName.setText(name);
     }
-
 
     public interface CpassListner {
         void onCpassSuccess();
