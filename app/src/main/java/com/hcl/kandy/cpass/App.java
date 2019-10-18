@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.hcl.kandy.cpass.activities.HomeActivity;
 import com.hcl.kandy.cpass.call.CPaaSCallManager;
+import com.hcl.kandy.cpass.groupChat.CPaaSChatManager;
 import com.hcl.kandy.cpass.utils.CpassSubscribe;
 import com.rbbn.cpaas.mobile.CPaaS;
 import com.rbbn.cpaas.mobile.utilities.Configuration;
@@ -18,9 +19,14 @@ public class App extends Application {
 
 
     private CPaaSCallManager cPaaSCallManager = new CPaaSCallManager();
+    private CPaaSChatManager cPaaSChatManager = new CPaaSChatManager();
 
     public CPaaSCallManager getcPaaSCallManager() {
         return cPaaSCallManager;
+    }
+
+    public CPaaSChatManager getcPaaSChatManager() {
+        return cPaaSChatManager;
     }
 
     @Override
@@ -33,7 +39,6 @@ public class App extends Application {
 
         Configuration.getInstance().setUseSecureConnection(true);
         Configuration.getInstance().setRestServerUrl(baseUrl);
-//        Configuration.getInstance().setRestServerPort(8080);
         Configuration.getInstance().setLogLevel(LogLevel.TRACE);
         ConfigurationHelper.setConfigurations(baseUrl);
         Globals.setApplicationContext(context);
@@ -42,6 +47,7 @@ public class App extends Application {
         mCpaas = CpassSubscribe.initKandyService(mAccessToken, idToken, cpassListner);
         try {
             this.mCpaas.getCallService().setCallApplicationListener(cPaaSCallManager);
+            this.mCpaas.getChatService().setChatListener(cPaaSChatManager);
         } catch (MobileException e) {
             e.printStackTrace();
         }
