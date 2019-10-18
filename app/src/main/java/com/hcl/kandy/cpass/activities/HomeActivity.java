@@ -24,6 +24,7 @@ import com.hcl.kandy.cpass.fragments.ChatFragment;
 import com.hcl.kandy.cpass.fragments.MultiMediaChatFragment;
 import com.hcl.kandy.cpass.fragments.PresenceFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
+import com.hcl.kandy.cpass.groupChat.GroupChatFragment;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
 
 public class HomeActivity extends BaseActivity
@@ -35,6 +36,7 @@ public class HomeActivity extends BaseActivity
     Fragment presenceFragment = PresenceFragment.newInstance();
     Fragment addressbookFragment = AddressbookListFragment.newInstance();
     Fragment multimediaChatFragment = MultiMediaChatFragment.newInstance();
+    Fragment groupChatFragment = new GroupChatFragment();
     Toolbar toolbar;
     boolean isPasswordGrantLoginType;
 
@@ -72,7 +74,6 @@ public class HomeActivity extends BaseActivity
             @Override
             public void onCpassSuccess() {
                 hideProgressBAr();
-
             }
 
             @Override
@@ -165,6 +166,16 @@ public class HomeActivity extends BaseActivity
 
             item.setChecked(true);
             invalidateOptionsMenu();
+        } else if (id == R.id.nav_group_chat) {
+            fragmentTransaction
+                    .replace(R.id.container, groupChatFragment).commit();
+
+            ActionBar supportActionBar = getSupportActionBar();
+            if (supportActionBar != null)
+                supportActionBar.setTitle("Group Chat");
+
+            item.setChecked(true);
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_logout) {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
@@ -188,7 +199,6 @@ public class HomeActivity extends BaseActivity
         tvEmail.setText(email);
         tvName.setText(name);
     }
-
 
     public interface CpassListner {
         void onCpassSuccess();

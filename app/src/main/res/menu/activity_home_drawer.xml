@@ -28,6 +28,10 @@
             android:id="@+id/nav_presence"
             android:icon="@drawable/ic_presence"
             android:title="Presence" />
+        <item
+            android:id="@+id/nav_group_chat"
+            android:icon="@drawable/ic_chat"
+            android:title="Group Chat" />
 
         <item
             android:id="@+id/nav_logout"
