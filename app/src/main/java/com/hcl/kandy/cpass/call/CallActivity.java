@@ -238,8 +238,6 @@ public class CallActivity extends AppCompatActivity implements IncomingCallFragm
                 break;
             case ON_DOUBLE_HOLD:
                 break;
-//            case JOINING:
-//                break;
             case ENDED:
                 if (activeCall != null && activeCall.first.equals(callId)) {
                     Log.d(TAG, "callStateChanged: Active call ENDED");
