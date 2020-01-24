@@ -159,6 +159,16 @@ public class CPaaSCallManager implements CallApplicationListener {
     }
 
     @Override
+    public void forwardCallSucceeded(IncomingCallInterface incomingCallInterface) {
+
+    }
+
+    @Override
+    public void forwardCallFailed(IncomingCallInterface incomingCallInterface, MobileError mobileError) {
+
+    }
+
+    @Override
     public void videoStopSucceed(CallInterface call) {
         Log.d(TAG, "videoStopSucceed: " + call.getId());
     }
