@@ -1,65 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/etSenderAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Sender address"
-        android:maxLines="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/etDestainationAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Destination address"
-        android:maxLines="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toTopOf="@+id/etMessage"
-        app:layout_constraintTop_toBottomOf="@+id/etDestainationAddress" />
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etMessage"
+        <EditText
+            android:id="@+id/etSenderAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter message"
-            android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/btnStartSMS" />
+            android:hint="Enter Sender number"
+            android:maxLines="1" />
 
-        <ImageButton
-            android:id="@+id/btnStartSMS"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etDestainationAddress"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/ic_menu_send"
-            android:padding="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/etMessage"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/etMessage"
-            tools:ignore="ContentDescription" />
-    </LinearLayout>
+            android:hint="Enter Destination number"
+            android:maxLines="1" />
 
-</LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter message" />
+
+            <ImageButton
+                android:id="@+id/btnStartSMS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/ic_menu_send"
+                android:padding="24dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -44,7 +44,7 @@ import java.util.TimeZone;
 
 public class GroupChatFragment extends Fragment implements View.OnClickListener {
 
-    protected static ChatService chatService;
+    protected ChatService chatService;
 
     protected ListView listView;
 

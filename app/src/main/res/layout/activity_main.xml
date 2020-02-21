@@ -74,7 +74,8 @@
                     android:id="@+id/et_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="abcd@xyz.com" />
+                    android:hint="abcd@xyz.com"
+                    android:text="nesonukuv@planet-travel.club" />
 
                 <TextView
                     android:id="@+id/tv_user_password"
@@ -101,7 +102,8 @@
                     android:id="@+id/et_user_client"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="PUB-test123" />
+                    android:hint="PUB-test123"
+                    android:text="PUB-nesonukuv.34mv" />
 
             </LinearLayout>
 

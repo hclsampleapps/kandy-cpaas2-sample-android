@@ -12,13 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
 import com.hcl.kandy.cpass.adapters.ChatAdapter;
 import com.hcl.kandy.cpass.models.ChatModel;
 import com.rbbn.cpaas.mobile.CPaaS;
+import com.rbbn.cpaas.mobile.messaging.api.Conversation;
+import com.rbbn.cpaas.mobile.messaging.api.FetchCallback;
+import com.rbbn.cpaas.mobile.messaging.api.FetchConversationCallback;
+import com.rbbn.cpaas.mobile.messaging.api.FetchOptions;
+import com.rbbn.cpaas.mobile.messaging.api.FetchResult;
 import com.rbbn.cpaas.mobile.messaging.api.InboundMessage;
+import com.rbbn.cpaas.mobile.messaging.api.Message;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
@@ -38,6 +46,8 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     private RecyclerView mRecyclerView;
     private ChatAdapter mChatAdapter;
     private ArrayList<ChatModel> mChatModels;
+    private ImageButton btnFetchChat;
+    private LinearLayout showChatLayout;
 
     public ChatFragment() {
 
@@ -63,6 +73,9 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_chat, container, false);
         View mBtnSendMessage = inflate.findViewById(R.id.btnStartChat);
+        btnFetchChat = inflate.findViewById(R.id.btnFetchChat);
+        btnFetchChat.setOnClickListener(this);
+        showChatLayout = inflate.findViewById(R.id.showChatLayout);
         mEtDestination = inflate.findViewById(R.id.etDestainationAddress);
         mEtMessage = inflate.findViewById(R.id.etMessage);
         mRecyclerView = inflate.findViewById(R.id.recycleView);
@@ -78,6 +91,67 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnFetchChat:
+                if (mEtDestination.getText().length() > 0) {
+                    mEtDestination.setEnabled(false);
+                    btnFetchChat.setVisibility(View.GONE);
+                    showChatLayout.setVisibility(View.VISIBLE);
+                    chatService.fetchConversation(mEtDestination.getText().toString(), new FetchConversationCallback() {
+                        @Override
+                        public void onSuccess(Conversation conversation) {
+                            ChatConversation chatConversation = (ChatConversation) conversation;
+                            FetchOptions f = new FetchOptions();
+                            f.max(10);
+                            chatConversation.fetchMessages(f, new FetchCallback<List<Message>>() {
+                                @Override
+                                public void onSuccess(FetchResult<List<Message>> fetchResult) {
+                                    List<Message> messages = fetchResult.getResult();
+                                    for (int i = messages.size() - 1; i >= 0; i--) {
+                                        boolean type = true;
+                                        if (messages.get(i) instanceof OutboundMessage) {
+                                            // If the current user is the sender of the message
+                                            type = false;
+                                        }
+                                        ChatModel chatModel = new ChatModel(
+                                                messages.get(i).getMessage(),
+                                                messages.get(i).getSenderAddress(),
+                                                type,
+                                                messages.get(i).getMessageId()
+                                        );
+                                        notifyList(chatModel);
+                                    }
+                                }
+
+                                @Override
+                                public void onFail(MobileError mobileError) {
+                                    mobileError.getErrorMessage();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFail(MobileError error) {
+                            // create a new conversation with the given participant
+                        }
+                    });
+                } else {
+                    showMessage("Please enter Destination Address.");
+                }
+                break;
+            case R.id.btnStartChat:
+                if (mEtMessage.getText().length() == 0) {
+                    showMessage("Enter Message");
+                    return;
+                }
+//                showProgressBar("");
+                sendMessage(mEtDestination.getText().toString(), mEtMessage.getText().toString());
+                break;
+        }
     }
 
     private void initChatService(@NonNull Context context) {
@@ -145,10 +219,9 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void sendMessage(String participant, String txt) {
+
         ChatConversation chatConversation = (ChatConversation) chatService.createConversation(participant);
-
         OutboundMessage message = chatService.createMessage(txt);
-
         chatConversation.send(message, new MessagingCallback() {
             @Override
             public void onSuccess() {
@@ -161,20 +234,12 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
                 showMessage("Try again later");
             }
         });
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnStartChat:
-                sendMessage(mEtDestination.getText().toString(), mEtMessage.getText().toString());
-                break;
-        }
     }
 
     private void notifyList(ChatModel chatModel) {
@@ -189,7 +254,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
                     Log.d("cpass", "notify list");
                     mChatAdapter.notifyDataSetChanged();
                     mRecyclerView.scrollToPosition(mChatModels.size() - 1);
-                } // This is your code
+                }
             };
             mainHandler.post(myRunnable);
         }

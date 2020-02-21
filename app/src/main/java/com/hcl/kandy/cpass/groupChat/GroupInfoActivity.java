@@ -26,17 +26,13 @@ import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatGroup;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatGroupParticipant;
+import com.rbbn.cpaas.mobile.messaging.chat.api.ChatService;
 import com.rbbn.cpaas.mobile.messaging.chat.api.FetchAllParticipantsForGroupCallback;
 import com.rbbn.cpaas.mobile.messaging.chat.api.FetchGroupCallback;
 import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.hcl.kandy.cpass.groupChat.GroupChatFragment.chatService;
-
-//import com.rbbn.cpaas.mobile.demo_java.CPaaSManager;
-
 
 public class GroupInfoActivity extends AppCompatActivity {
     private static final String TAG = "GroupInfoActivity";
@@ -51,6 +47,7 @@ public class GroupInfoActivity extends AppCompatActivity {
     FloatingActionButton saveGroupInfoButton;
     private ChatConversation conversation = null;
     private ChatGroupParticipant selectedChatGroupParticipant;
+    protected ChatService chatService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

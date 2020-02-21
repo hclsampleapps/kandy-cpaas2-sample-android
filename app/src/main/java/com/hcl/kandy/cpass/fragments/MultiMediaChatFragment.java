@@ -55,8 +55,8 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
     private ImageView imagePreview;
     private int PermissionDenied = 0;
     private List<Attachment> attachments = new ArrayList<>();
-    private ImageButton btnSelectId;
-    private LinearLayout complete_layout;
+    private ImageButton btnFetchChat;
+    private LinearLayout showChatLayout;
     private Uri uri;
     private ChatService chatService;
     private EditText mEtDestination;
@@ -108,9 +108,9 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
         mEtDestination = inflate.findViewById(R.id.etDestainationAddress);
         imagePreview = inflate.findViewById(R.id.image_preview);
         mEtMessage = inflate.findViewById(R.id.etMessage);
-        btnSelectId = inflate.findViewById(R.id.btnSelectId);
-        btnSelectId.setOnClickListener(this);
-        complete_layout = inflate.findViewById(R.id.complete_layout);
+        btnFetchChat = inflate.findViewById(R.id.btnFetchChat);
+        btnFetchChat.setOnClickListener(this);
+        showChatLayout = inflate.findViewById(R.id.showChatLayout);
         mRecyclerView = inflate.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -292,11 +292,11 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnSelectId:
+            case R.id.btnFetchChat:
                 if (mEtDestination.getText().length() > 0) {
                     mEtDestination.setEnabled(false);
-                    btnSelectId.setVisibility(View.GONE);
-                    complete_layout.setVisibility(View.VISIBLE);
+                    btnFetchChat.setVisibility(View.GONE);
+                    showChatLayout.setVisibility(View.VISIBLE);
                     chatService.fetchConversation(mEtDestination.getText().toString(), new FetchConversationCallback() {
                         @Override
                         public void onSuccess(Conversation conversation) {

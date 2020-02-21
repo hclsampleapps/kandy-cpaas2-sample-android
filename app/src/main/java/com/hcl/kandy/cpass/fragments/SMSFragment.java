@@ -1,15 +1,18 @@
 package com.hcl.kandy.cpass.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import com.hcl.kandy.cpass.App;
@@ -49,7 +52,6 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         mSMSModels = new ArrayList<>();
         mSMSAdapter = new SMSAdapter(mSMSModels);
     }
@@ -80,6 +82,9 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
+    int select_position = 0;
+    List<String> localAdressList;
+
     private void initSMSService(@NonNull Context context) {
         App applicationContext = (App) context.getApplicationContext();
 
@@ -88,6 +93,39 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
 
         CPaaS cpass = applicationContext.getCpass();
         smsService = cpass.getSMSService();
+        localAdressList = smsService.getLocalAddressList();
+        if (localAdressList != null && localAdressList.size() > 0) {
+
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
+            builderSingle.setTitle("Select One Number:-");
+            builderSingle.setCancelable(false);
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.select_dialog_singlechoice);
+
+            for (int i = 0; i < localAdressList.size(); i++) {
+                arrayAdapter.add(localAdressList.get(i));
+            }
+
+            builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int position) {
+                    select_position = position;
+                    String strName = arrayAdapter.getItem(select_position);
+                    mEtSender.setText(strName);
+                    mEtSender.setEnabled(false);
+                }
+            });
+            builderSingle.show();
+
+        }
+
         smsService.setSMSListener(new SMSListener() {
             @Override
             public void inboundSMSMessageReceived(InboundMessage inboundMessage) {
@@ -128,8 +166,10 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
-    private void sendMessage(String sender, String participant, String txt) {
-        SMSConversation smsConversation = (SMSConversation) smsService.createConversation(participant, sender);
+    private void sendMessage(String participant, String txt) {
+
+        SMSConversation smsConversation = (SMSConversation)
+                smsService.createConversation(participant, localAdressList.get(select_position));
 
         OutboundMessage message = smsService.createMessage(txt);
 
@@ -157,7 +197,14 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnStartSMS:
-                sendMessage(mEtSender.getText().toString(), mEtDestination.getText().toString(), mEtMessage.getText().toString());
+                if (mEtDestination.getText().length() == 0) {
+                    showMessage(mEtDestination, "Enter Destination number");
+                    return;
+                } else if (mEtSender.getText().length() == 0) {
+                    showMessage(mEtSender, "Enter Sender number");
+                    return;
+                } else
+                    sendMessage(mEtDestination.getText().toString(), mEtMessage.getText().toString());
                 break;
         }
     }
