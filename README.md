@@ -1,5 +1,5 @@
 # kandy-cpaas2-sample-android
-It is the sample app of CPaaS2 modules (Call, SMS, Chat, Presence, Address book)
+It is the sample app of CPaaS2 modules (Call, SMS, Chat, Presence, Address book, Group Chat & Multimedia Chat)
 
 ### Install as Android App
 You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-android/releases) section.
