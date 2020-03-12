@@ -20,7 +20,7 @@
 
     <application
         android:name=".App"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -50,7 +50,6 @@
             android:label="call"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".groupChat.GroupChatMessageStatusDetailActivity" android:label="@string/title_activity_message_detail"/>
         <activity android:name=".groupChat.GroupChatDetailActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".groupChat.GroupInfoActivity" android:windowSoftInputMode="stateHidden"/>
     </application>

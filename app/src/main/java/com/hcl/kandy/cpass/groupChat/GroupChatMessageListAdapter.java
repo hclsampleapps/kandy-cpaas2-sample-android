@@ -60,11 +60,7 @@ public class GroupChatMessageListAdapter extends RecyclerView.Adapter<GroupChatM
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Intent intent = new Intent(context, GroupChatMessageStatusDetailActivity.class);
-                intent.putExtra("messageText", message.getMessage());
-                intent.putExtra("messageId", message.getMessageId());
-                intent.putExtra("groupId", message.getDestinationAddress());
-                view.getContext().startActivity(intent);
+
                 return false;
             }
         });
@@ -79,43 +75,6 @@ public class GroupChatMessageListAdapter extends RecyclerView.Adapter<GroupChatM
             viewForeground = view.findViewById(R.id.view_foreground);
         }
 
-        void handleAttachment(Message message, ImageView imageView) {
-            List<Part> parts = message.getParts();
-            if (parts.size() > 1) {
-                Attachment attachment = message.getParts().get(1).getFile();
-                File f = new File(GroupChatDetailActivity.DOWNLOAD_FOLDER + File.separator + attachment.getName());
-                if (f.exists()) {
-                    // if the file exists locally, and is an image, then show it
-                    Bitmap bitmap = BitmapFactory.decodeFile(f.getAbsolutePath());
-                    imageView.setImageBitmap(bitmap);
-                    imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            GroupChatDetailActivity activity = (GroupChatDetailActivity) context;
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", f);
-                            intent.setDataAndType(uri, "image/*");
-                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            activity.startActivity(intent);
-                        }
-                    });
-                } else {
-                    imageView.setImageResource(android.R.drawable.ic_menu_gallery);
-                    imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            GroupChatDetailActivity activity = (GroupChatDetailActivity) context;
-                            activity.downloadAttachment(attachment, imageView);
-                        }
-                    });
-                }
-                imageView.setVisibility(View.VISIBLE);
-            } else {
-                // no attachments in this message, so hide the temporary ImageView
-                imageView.setImageResource(android.R.drawable.ic_menu_gallery);
-                imageView.setVisibility(View.GONE);
-            }
-        }
     }
 
     private class GroupChatMessageHolder extends MyViewHolder {
@@ -139,7 +98,6 @@ public class GroupChatMessageListAdapter extends RecyclerView.Adapter<GroupChatM
 
             messageText.setText(message.getMessage());
 
-            handleAttachment(message, attachedImageView);
 
             String t_str;
             long timestamp = message.getTimestamp();

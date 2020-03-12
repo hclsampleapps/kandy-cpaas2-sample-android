@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -13,32 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/etDestainationAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Enter destination address"
             android:maxLines="1"
-            android:singleLine="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:singleLine="true" />
 
         <ImageButton
-            android:id="@+id/btnSelectId"
+            android:id="@+id/btnFetchChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:drawable/ic_menu_send"
-            android:padding="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/etMessage"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/etMessage"
-            tools:ignore="ContentDescription" />
+            android:padding="24dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/complete_layout"
+        android:id="@+id/showChatLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -48,10 +39,7 @@
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toTopOf="@+id/image_preview"
-            app:layout_constraintTop_toBottomOf="@+id/etDestainationAddress"
-            tools:layout_editor_absoluteX="16dp" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/image_preview"
@@ -59,9 +47,7 @@
             android:layout_height="96dp"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/etMessage"
-            tools:layout_editor_absoluteX="16dp" />
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,16 +59,11 @@
                 android:id="@+id/btnStartAttach"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_add"
                 android:layout_marginStart="8dp"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/etMessage"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/etMessage"
-                app:srcCompat="@android:drawable/ic_menu_add"
-                tools:ignore="ContentDescription" />
+                android:background="@color/white" />
 
-            <android.support.v7.widget.AppCompatEditText
+            <EditText
                 android:id="@+id/etMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,22 +71,14 @@
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:hint="Enter message"
-                android:maxLines="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnStartChat"
-                app:layout_constraintRight_toLeftOf="@+id/btnStartChat"
-                app:layout_constraintStart_toEndOf="@+id/btnStartAttach" />
+                android:maxLines="1" />
 
             <ImageButton
                 android:id="@+id/btnSendChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/ic_menu_send"
-                android:padding="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/etMessage"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/etMessage"
-                tools:ignore="ContentDescription" />
+                android:padding="24dp" />
 
         </LinearLayout>
 
