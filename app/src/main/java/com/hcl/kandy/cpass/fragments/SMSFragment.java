@@ -83,7 +83,7 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
     }
 
     int select_position = 0;
-    List<String> localAdressList;
+    List<String> localAddressList;
 
     private void initSMSService(@NonNull Context context) {
         App applicationContext = (App) context.getApplicationContext();
@@ -93,8 +93,8 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
 
         CPaaS cpass = applicationContext.getCpass();
         smsService = cpass.getSMSService();
-        localAdressList = smsService.getLocalAddressList();
-        if (localAdressList != null && localAdressList.size() > 0) {
+        localAddressList = smsService.getLocalAddressList();
+        if (localAddressList != null && localAddressList.size() > 0) {
 
             AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
             builderSingle.setTitle("Select One Number:-");
@@ -102,8 +102,8 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),
                     android.R.layout.select_dialog_singlechoice);
 
-            for (int i = 0; i < localAdressList.size(); i++) {
-                arrayAdapter.add(localAdressList.get(i));
+            for (int i = 0; i < localAddressList.size(); i++) {
+                arrayAdapter.add(localAddressList.get(i));
             }
 
             builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -169,7 +169,7 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
     private void sendMessage(String participant, String txt) {
 
         SMSConversation smsConversation = (SMSConversation)
-                smsService.createConversation(participant, localAdressList.get(select_position));
+                smsService.createConversation(participant, localAddressList.get(select_position));
 
         OutboundMessage message = smsService.createMessage(txt);
 

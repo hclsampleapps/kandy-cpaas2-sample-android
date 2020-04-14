@@ -297,44 +297,6 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
                     mEtDestination.setEnabled(false);
                     btnFetchChat.setVisibility(View.GONE);
                     showChatLayout.setVisibility(View.VISIBLE);
-                    chatService.fetchConversation(mEtDestination.getText().toString(), new FetchConversationCallback() {
-                        @Override
-                        public void onSuccess(Conversation conversation) {
-                            ChatConversation chatConversation = (ChatConversation) conversation;
-                            FetchOptions f = new FetchOptions();
-                            f.max(10);
-                            chatConversation.fetchMessages(f, new FetchCallback<List<Message>>() {
-                                @Override
-                                public void onSuccess(FetchResult<List<Message>> fetchResult) {
-                                    List<Message> messages = fetchResult.getResult();
-                                    for (int i = messages.size() - 1; i >= 0; i--) {
-                                        boolean type = true;
-                                        if (messages.get(i) instanceof OutboundMessage) {
-                                            // If the current user is the sender of the message
-                                            type = false;
-                                        }
-                                        MultimediaChatModelChatModel multimediaChatModel = new MultimediaChatModelChatModel(
-                                                messages.get(i).getMessage(),
-                                                messages.get(i).getSenderAddress(),
-                                                type,
-                                                messages.get(i).getMessageId(), messages.get(i).getParts()
-                                        );
-                                        notifyList(multimediaChatModel);
-                                    }
-                                }
-
-                                @Override
-                                public void onFail(MobileError mobileError) {
-                                    mobileError.getErrorMessage();
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onFail(MobileError error) {
-                            // create a new conversation with the given participant
-                        }
-                    });
                 } else {
                     showMessage("Please enter Destination Address.");
                 }
