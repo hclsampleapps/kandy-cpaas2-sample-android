@@ -29,6 +29,8 @@ import com.hcl.kandy.cpass.utils.MarshMallowPermission;
 import com.rbbn.cpaas.mobile.CPaaS;
 import com.rbbn.cpaas.mobile.messaging.api.Attachment;
 import com.rbbn.cpaas.mobile.messaging.api.InboundMessage;
+import com.rbbn.cpaas.mobile.messaging.api.MessageDeliveryStatus;
+import com.rbbn.cpaas.mobile.messaging.api.MessageState;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
@@ -144,8 +146,8 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
             }
 
             @Override
-            public void chatDeliveryStatusChanged(String s, String s1, String s2) {
-                Log.d("CPaaS.ChatService", "Message delivery status changed to " + s1);
+            public void chatDeliveryStatusChanged(String s, MessageDeliveryStatus messageDeliveryStatus, String s1) {
+
             }
 
             @Override
@@ -189,7 +191,7 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
             }
 
             @Override
-            public void isComposingReceived(String s, String s1, long l) {
+            public void isComposingReceived(String s, MessageState messageState, long l) {
 
             }
 

@@ -123,7 +123,7 @@
                     android:id="@+id/et_client_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="PRIV-nesonukuv.34mv.nesopro1" />
+                    android:hint="abcd123-12a1-1a12-1234-123a45678b9c" />
 
                 <TextView
                     android:id="@+id/tv_client_secret"
