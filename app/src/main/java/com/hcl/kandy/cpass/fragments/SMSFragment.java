@@ -21,6 +21,7 @@ import com.hcl.kandy.cpass.adapters.SMSAdapter;
 import com.hcl.kandy.cpass.models.SMSModel;
 import com.rbbn.cpaas.mobile.CPaaS;
 import com.rbbn.cpaas.mobile.messaging.api.InboundMessage;
+import com.rbbn.cpaas.mobile.messaging.api.MessageDeliveryStatus;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
 import com.rbbn.cpaas.mobile.messaging.sms.api.SMSConversation;
@@ -140,8 +141,8 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
             }
 
             @Override
-            public void SMSDeliveryStatusChanged(String s, String s1, String s2) {
-                Log.d("CPaaS.SMSService", "Message delivery status changed to " + s1);
+            public void SMSDeliveryStatusChanged(String s, MessageDeliveryStatus messageDeliveryStatus, String s1) {
+
             }
 
             @Override

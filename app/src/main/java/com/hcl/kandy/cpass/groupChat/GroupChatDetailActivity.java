@@ -29,6 +29,8 @@ import com.rbbn.cpaas.mobile.messaging.api.FetchConversationCallback;
 import com.rbbn.cpaas.mobile.messaging.api.FetchMessagesCallback;
 import com.rbbn.cpaas.mobile.messaging.api.InboundMessage;
 import com.rbbn.cpaas.mobile.messaging.api.Message;
+import com.rbbn.cpaas.mobile.messaging.api.MessageDeliveryStatus;
+import com.rbbn.cpaas.mobile.messaging.api.MessageState;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
@@ -176,14 +178,11 @@ public class GroupChatDetailActivity extends AppCompatActivity  {
             }
 
             @Override
-            public void chatDeliveryStatusChanged(String participant, String deliveryStatus, String messageID) {
+            public void chatDeliveryStatusChanged(String s, MessageDeliveryStatus messageDeliveryStatus, String messageID) {
                 for (Message msg : messageList) {
                     String id = msg.getMessageId();
                     if (messageID != null && messageID.equals(id)) {
-                        // update the status of the message
-                        msg.setStatus(deliveryStatus);
-
-                        // show a Toast, or something
+                        msg.setStatus(messageDeliveryStatus);
                     }
                 }
             }
@@ -209,7 +208,7 @@ public class GroupChatDetailActivity extends AppCompatActivity  {
             }
 
             @Override
-            public void isComposingReceived(String s, String s1, long l) {
+            public void isComposingReceived(String s, MessageState messageState, long l) {
 
             }
 
