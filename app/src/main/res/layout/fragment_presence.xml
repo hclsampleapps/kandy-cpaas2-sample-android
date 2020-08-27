@@ -29,7 +29,6 @@
         tools:text="Available" />
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/editPrensence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"

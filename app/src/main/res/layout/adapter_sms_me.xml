@@ -38,7 +38,7 @@
             android:textAlignment="viewEnd"
             android:textColor="@color/white"
             android:textSize="12sp"
-            tools:text="Hi from Text wfger gregu tguetgh tghetuoghe tge tget " />
+            tools:text="Hi from Text" />
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
