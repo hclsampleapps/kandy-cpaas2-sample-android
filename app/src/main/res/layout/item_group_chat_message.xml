@@ -73,7 +73,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/group_message_body_and_attachment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/group_message_sender_and_time"
