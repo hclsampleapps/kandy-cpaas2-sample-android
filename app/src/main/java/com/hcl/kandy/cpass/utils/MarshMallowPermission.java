@@ -3,7 +3,7 @@ package com.hcl.kandy.cpass.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.widget.Toast;
 
 import com.hcl.kandy.cpass.R;
