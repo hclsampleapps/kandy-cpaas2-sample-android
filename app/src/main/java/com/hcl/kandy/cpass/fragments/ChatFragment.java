@@ -3,10 +3,10 @@ package com.hcl.kandy.cpass.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,17 +20,12 @@ import com.hcl.kandy.cpass.R;
 import com.hcl.kandy.cpass.adapters.ChatAdapter;
 import com.hcl.kandy.cpass.models.ChatModel;
 import com.rbbn.cpaas.mobile.CPaaS;
-import com.rbbn.cpaas.mobile.messaging.api.Conversation;
-import com.rbbn.cpaas.mobile.messaging.api.FetchCallback;
-import com.rbbn.cpaas.mobile.messaging.api.FetchConversationCallback;
-import com.rbbn.cpaas.mobile.messaging.api.FetchOptions;
-import com.rbbn.cpaas.mobile.messaging.api.FetchResult;
 import com.rbbn.cpaas.mobile.messaging.api.InboundMessage;
-import com.rbbn.cpaas.mobile.messaging.api.Message;
 import com.rbbn.cpaas.mobile.messaging.api.MessageDeliveryStatus;
 import com.rbbn.cpaas.mobile.messaging.api.MessageState;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
+import com.rbbn.cpaas.mobile.messaging.api.SendMessageCallback;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatGroupParticipant;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatListener;
@@ -186,9 +181,10 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
 
         ChatConversation chatConversation = (ChatConversation) chatService.createConversation(participant);
         OutboundMessage message = chatService.createMessage(txt);
-        chatConversation.send(message, new MessagingCallback() {
+        chatConversation.send(message, new SendMessageCallback() {
+
             @Override
-            public void onSuccess() {
+            public void onSuccess(OutboundMessage outboundMessage) {
                 Log.d("CPaaS.ChatService", "Message is sent");
             }
 
