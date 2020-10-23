@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +24,7 @@ import com.rbbn.cpaas.mobile.messaging.api.InboundMessage;
 import com.rbbn.cpaas.mobile.messaging.api.MessageDeliveryStatus;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
+import com.rbbn.cpaas.mobile.messaging.api.SendMessageCallback;
 import com.rbbn.cpaas.mobile.messaging.sms.api.SMSConversation;
 import com.rbbn.cpaas.mobile.messaging.sms.api.SMSListener;
 import com.rbbn.cpaas.mobile.messaging.sms.api.SMSService;
@@ -174,9 +175,10 @@ public class SMSFragment extends BaseFragment implements View.OnClickListener {
 
         OutboundMessage message = smsService.createMessage(txt);
 
-        smsConversation.send(message, new MessagingCallback() {
+        smsConversation.send(message, new SendMessageCallback() {
+
             @Override
-            public void onSuccess() {
+            public void onSuccess(OutboundMessage outboundMessage) {
                 Log.d("CPaaS.SMSService", "Message is sent");
                 showMessage(mEtMessage, "Message is sent");
             }
