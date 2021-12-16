@@ -1,26 +1,164 @@
 package com.hcl.kandy.cpass;
 
-import android.content.Context;
-import androidx.test.platform.app.InstrumentationRegistry;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.espresso.contrib.DrawerActions;
+import androidx.test.espresso.contrib.NavigationViewActions;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.hcl.kandy.cpass.activities.LoginActivity;
+
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
-
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.hcl.kandy.cpass", appContext.getPackageName());
+
+    // @Rule
+    //public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
+
+    private String url = "oauth-cpaas.att.com";
+    private String uName = "karang@hcl.com";
+    private String pwd = "Test@12345";
+    private String client = "PUB-karan.prod.lwjn";
+    private String destination = "ashish@gmail.com";
+    private String destinationSMS = "+911234567890";
+    private String destinationAddress = "abc@gmail.com";
+    private String participant_address = "abc@gmail.com";
+
+    @Test
+    public void verifyMessageSentToMessageActivity() {
+
+        ActivityScenario.launch(LoginActivity.class);
+        // Types a message into a EditText element.
+        onView(withId(R.id.et_url))
+                .perform(typeText(url), closeSoftKeyboard());
+        onView(withId(R.id.et_user_name))
+                .perform(typeText(uName), closeSoftKeyboard());
+        onView(withId(R.id.et_user_password))
+                .perform(typeText(pwd), closeSoftKeyboard());
+        onView(withId(R.id.et_user_client))
+                .perform(typeText(client), closeSoftKeyboard());
+
+        // Clicks a button to send the message to another
+        // activity through an explicit intent.
+        onView(withId(R.id.button_login)).perform(click());
+
+        // Verifies that the DisplayMessageActivity received an intent
+        // with the correct package name and message.
+
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.container)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.etDestainationAddress))
+                .perform(typeText(destination), closeSoftKeyboard());
+        onView(withId(R.id.btnFetchChat)).perform(click());
+
+        onView(withId(R.id.etMessage))
+                .perform(typeText("hi"), closeSoftKeyboard());
+        onView(withId(R.id.btnStartChat)).perform(click());
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
+
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sms));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withText("+12102424496")).perform(click());
+        onView(withId(R.id.etDestainationAddress))
+                .perform(typeText(destinationSMS), closeSoftKeyboard());
+        onView(withId(R.id.etMessage))
+                .perform(typeText("hello"), closeSoftKeyboard());
+        onView(withId(R.id.btnStartSMS)).perform(click());
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
+
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_multimedia));
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.etDestainationAddress))
+                .perform(typeText(destinationAddress), closeSoftKeyboard());
+
+        onView(withId(R.id.btnFetchChat)).perform(click());
+        onView(withId(R.id.etMessage))
+                .perform(typeText("hello"), closeSoftKeyboard());
+
+        onView(withId(R.id.btnSendChat)).perform(click());
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
+
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_call));
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.participant_address))
+                .perform(typeText(participant_address), closeSoftKeyboard());
+        onView(withId(R.id.start_call_button)).perform(click());
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.activeCallHangupButton)).perform(click());
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
+
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_presence));
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+
 }
