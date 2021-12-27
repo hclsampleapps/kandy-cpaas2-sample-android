@@ -12,6 +12,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.contrib.DrawerActions;
 import androidx.test.espresso.contrib.NavigationViewActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -152,6 +153,23 @@ public class ExampleInstrumentedTest {
         }
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
 
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_addressbook));
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.recycleView))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.et_last_name))
+                .perform(typeText("abcd"), closeSoftKeyboard());
+        onView(withId(R.id.button_create_contact)).perform(click());
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_presence));
 
         try {
