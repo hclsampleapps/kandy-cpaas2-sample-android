@@ -1,5 +1,6 @@
 package com.hcl.kandy.cpass;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -10,6 +11,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import static org.hamcrest.Matchers.anything;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.action.ViewActions;
@@ -187,8 +190,17 @@ public class ExampleInstrumentedTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        onView(withId(R.id.groupList))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+       // onView(withId(R.id.groupList))
+         //       .perform(ListVie.actionOnItemAtPosition(0, click()));
+        onData(anything()).inAdapterView(withId(R.id.groupList)).atPosition(0).perform(click());
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.messageEditText))
+                .perform(typeText("abcd"), closeSoftKeyboard());
+        onView(withId(R.id.sendMessage)).perform(click());
     }
 
 }
