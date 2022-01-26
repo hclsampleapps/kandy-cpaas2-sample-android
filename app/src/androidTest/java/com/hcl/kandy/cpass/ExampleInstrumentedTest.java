@@ -32,11 +32,11 @@ public class ExampleInstrumentedTest {
     // @Rule
     //public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
 
-    private String url = "oauth-cpaas.att.com";
-    private String uName = "karang@hcl.com";
-    private String pwd = "Test@12345";
-    private String client = "PUB-karan.prod.lwjn";
-    private String destination = "ashish@gmail.com";
+    private String url = "domain-url.domain.com";
+    private String uName = "test@domain.com";
+    private String pwd = "Dummy@12345";
+    private String client = "PUB-domain.test";
+    private String destination = "abc@gmail.com";
     private String destinationSMS = "+911234567890";
     private String destinationAddress = "abc@gmail.com";
     private String participant_address = "abc@gmail.com";
