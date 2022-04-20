@@ -303,9 +303,9 @@ public class ExampleInstrumentedTest {
         }
         onView(withId(R.id.et_last_name))
                 .perform(typeText("abcd"), closeSoftKeyboard());
-        
+
         onView(withId(R.id.scroll_view)).perform(ViewActions.swipeUp());
-        
+
         onView(withId(R.id.button_create_contact)).perform(click());
         try {
             Thread.sleep(20000);
